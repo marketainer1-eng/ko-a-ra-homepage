@@ -131,9 +131,12 @@ src/
 
 Production 배포와 커스텀 도메인 연결은 아직 진행하지 않았다.
 
-## 현재 상태 (Phase 1)
+## 현재 상태 (Phase 2-A)
 
-전체 정보구조 · HOME 브랜드 경험 · 디자인 시스템 · 반응형 · 콘텐츠 데이터 구조 ·
-SEO/GEO 기술 기반까지 완료된 상태다.
-STORY 원고, 도서 정보, 프로젝트 내용, 외부 채널 URL 등 실제 콘텐츠는
-Phase 2에서 확정된 자료로 채운다.
+- **Phase 1**: 정보구조 · 디자인 시스템 · 반응형 · 콘텐츠 데이터 구조 · SEO/GEO 기반
+- **Phase 2-A (완료)**: HOME / ABOUT / VISION 실제 콘텐츠 반영
+  - 서사 데이터는 `src/content/narrative.ts`, Person 기준정보는 `src/config/person.ts`
+  - 기관 관계는 화면 표시(`relation`)와 Schema 출력 조건(`url` + `verified`)을 분리했다.
+    공식 URL과 관계가 검증되기 전에는 founder / affiliation / worksFor 등을 출력하지 않는다.
+- **남은 단계**: BOOKS 데이터(Phase 2-B), STORY 원고 · PROJECTS 내용 ·
+  외부 채널 URL · 기관 관계 Schema 확정(Phase 2-C)

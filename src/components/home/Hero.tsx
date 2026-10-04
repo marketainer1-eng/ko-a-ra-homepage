@@ -5,9 +5,9 @@ import { siteConfig } from "@/config/site";
 import { routes } from "@/lib/routes";
 
 const narrativeAnchors = [
-  { label: "PAST", href: "#past" },
-  { label: "PRESENT", href: "#present" },
-  { label: "FUTURE", href: "#future" },
+  { label: "PAST", href: "#past", summary: "쇼핑몰 창업 · 이커머스 현장" },
+  { label: "PRESENT", href: "#present", summary: "AI E-COMMERCE" },
+  { label: "FUTURE", href: "#future", summary: "VERTICAL AI × EXPERT IP" },
 ];
 
 /**
@@ -16,8 +16,9 @@ const narrativeAnchors = [
  * 가장 먼저 인식되어야 하는 관계: 고아라 = AI 이커머스
  * → h1 안에 KO A RA / AI E-COMMERCE / AI 이커머스 전문가 고아라 를 함께 둔다.
  *
- * 프로필 사진은 제공되지 않았으므로 가짜 인물 사진을 사용하지 않고
- * 오른쪽에 레이아웃 공간만 확보한다.
+ * 프로필 사진은 제공되지 않았으므로 가짜 인물 사진을 사용하지 않는다.
+ * 오른쪽 패널은 사진 없이도 완성되어 보이도록 PAST → PRESENT → FUTURE 서사
+ * 목차로 구성했고, 사진이 준비되면 같은 자리에 넣을 수 있다.
  */
 export function Hero() {
   return (
@@ -42,10 +43,11 @@ export function Hero() {
             </p>
 
             <p className="border-brand text-navy mt-8 border-l-2 py-1 pl-5 text-sm leading-[1.7] break-keep">
-              {person.officialRole.organization}{" "}
-              {person.officialRole.department}
+              {person.officialRole.lines[0]}
               <br />
-              <span className="font-semibold">{person.officialRole.title}</span>
+              <span className="font-semibold">
+                {person.officialRole.lines[1]}
+              </span>
             </p>
 
             <div className="mt-10 flex flex-wrap gap-3">
@@ -57,46 +59,57 @@ export function Hero() {
           </div>
 
           {/*
-            프로필 사진 자리.
-            사진이 준비되면 이 블록 내부를 next/image 로 교체하면 된다.
+            브랜드 패널 (데스크톱).
+            프로필 사진이 준비되면 이 패널 상단에 next/image 로 추가하면 된다.
             (가짜 인물 사진이나 스톡 이미지를 넣지 않는다)
           */}
-          <div className="relative hidden lg:block">
-            <div className="border-charcoal/15 relative aspect-4/5 w-full border bg-white">
-              <span
-                aria-hidden="true"
-                className="border-brand absolute -top-px -left-px size-10 border-t-2 border-l-2"
-              />
-              <span
-                aria-hidden="true"
-                className="border-brand absolute -right-px -bottom-px size-10 border-r-2 border-b-2"
-              />
-              <div
-                aria-hidden="true"
-                className="flex h-full flex-col items-center justify-center gap-6"
-              >
-                <span
-                  className="font-display text-charcoal/45 text-sm font-semibold tracking-[0.5em] uppercase"
-                  style={{
-                    writingMode: "vertical-rl",
-                    textOrientation: "upright",
-                  }}
+          <nav
+            aria-label="HOME 서사 순서"
+            className="bg-navy relative hidden flex-col justify-between gap-16 p-10 text-white lg:flex xl:p-12"
+          >
+            <span
+              aria-hidden="true"
+              className="bg-brand absolute top-0 left-0 h-1 w-24"
+            />
+            <p className="label-caps text-brand-soft/80">{siteConfig.name}</p>
+
+            <ol className="flex flex-col">
+              {narrativeAnchors.map((anchor) => (
+                <li
+                  key={anchor.href}
+                  className="border-t border-white/12 last:border-b"
                 >
-                  {siteConfig.name}
-                </span>
-                <span className="label-caps text-charcoal/45">PORTRAIT</span>
-              </div>
-            </div>
-          </div>
+                  <a
+                    href={anchor.href}
+                    className="group flex flex-col gap-2 py-5 transition-colors"
+                  >
+                    <span className="label-caps text-brand-soft/70 group-hover:text-brand-soft">
+                      {anchor.label}
+                    </span>
+                    <span className="font-display text-[0.95rem] leading-snug font-semibold tracking-[0.08em] break-keep text-white">
+                      {anchor.summary}
+                      <span
+                        aria-hidden="true"
+                        className="text-brand-soft/60 ml-2 inline-block transition-transform group-hover:translate-y-0.5"
+                      >
+                        ↓
+                      </span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
         </div>
 
+        {/* 모바일·태블릿용 서사 목차 (데스크톱에서는 위 패널이 대신한다) */}
         <nav
           aria-label="HOME 서사 순서"
-          className="border-charcoal/12 mt-16 border-t pt-6 lg:mt-20"
+          className="border-charcoal/12 mt-14 border-t pt-6 lg:hidden"
         >
-          <ol className="flex flex-wrap items-center gap-x-6 gap-y-2">
+          <ol className="flex flex-wrap items-center gap-x-5 gap-y-2">
             {narrativeAnchors.map((anchor, index) => (
-              <li key={anchor.href} className="flex items-center gap-6">
+              <li key={anchor.href} className="flex items-center gap-5">
                 <a
                   href={anchor.href}
                   className="font-display text-charcoal/65 hover:text-brand inline-flex min-h-11 items-center text-[0.7rem] font-semibold tracking-[0.22em] uppercase transition-colors"

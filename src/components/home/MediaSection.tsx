@@ -19,7 +19,7 @@ export function MediaSection() {
       <SectionHeader
         eyebrow="MEDIA"
         title="WRITING & MEDIA"
-        lead="글과 미디어 활동은 원문이 있는 채널로 연결합니다."
+        lead="전문 콘텐츠는 각 채널의 역할에 맞게 생산하고, 이 홈페이지에서는 그 채널들을 연결합니다."
       />
 
       <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

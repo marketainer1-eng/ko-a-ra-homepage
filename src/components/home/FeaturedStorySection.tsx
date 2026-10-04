@@ -13,7 +13,7 @@ export function FeaturedStorySection() {
       <SectionHeader
         eyebrow="STORY"
         title="FEATURED STORY"
-        lead="지금의 방향에 이르기까지의 기록입니다."
+        lead="왜 지금의 방향에 이르렀는지를 세 편의 글로 정리하고 있습니다."
       />
 
       <ul className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
@@ -25,7 +25,7 @@ export function FeaturedStorySection() {
       </ul>
 
       <DraftNote className="mt-12">
-        세 편의 글은 제목과 URL만 확정된 상태이며, 원고는 준비 중입니다.
+        세 편 모두 상세 원고를 준비하고 있습니다.
       </DraftNote>
 
       <div className="mt-8">

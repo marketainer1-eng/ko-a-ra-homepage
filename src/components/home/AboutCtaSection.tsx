@@ -14,7 +14,7 @@ export function AboutCtaSection() {
             {person.positioning}
           </p>
           <p className="text-charcoal/65 mt-5 max-w-[34rem] text-sm leading-[1.8] break-keep">
-            공식 프로필, 전문영역, 활동 영역은 ABOUT 페이지에서 확인할 수
+            공식 프로필과 전문영역, 기관과의 관계는 ABOUT 페이지에서 확인할 수
             있습니다.
           </p>
         </div>

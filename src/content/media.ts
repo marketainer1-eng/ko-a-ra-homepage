@@ -14,7 +14,7 @@ export const mediaChannels: MediaChannel[] = [
   {
     key: "korea-shoppingmall-news",
     name: "한국쇼핑몰신문",
-    role: "이커머스 산업 미디어",
+    role: "쇼핑몰 창업 · 이커머스 · 온라인 유통",
     type: "news",
     url: null,
     verified: false,
@@ -22,7 +22,7 @@ export const mediaChannels: MediaChannel[] = [
   {
     key: "ai-agent-times",
     name: "AI에이전트타임즈",
-    role: "AI 에이전트 산업 미디어",
+    role: "AI Agent · AI Search · GEO · Agentic Commerce",
     type: "news",
     url: null,
     verified: false,
@@ -30,7 +30,7 @@ export const mediaChannels: MediaChannel[] = [
   {
     key: "professor-column",
     name: "AI 이커머스학과 교수칼럼",
-    role: "정기 칼럼",
+    role: "AI 이커머스 교육 · 산업 관점",
     type: "column",
     url: null,
     verified: false,
@@ -46,7 +46,7 @@ export const mediaChannels: MediaChannel[] = [
   {
     key: "threads",
     name: "Threads",
-    role: "생각과 관점",
+    role: "짧지만 밀도 있는 생각과 관점",
     type: "social",
     url: null,
     verified: false,
@@ -54,7 +54,7 @@ export const mediaChannels: MediaChannel[] = [
   {
     key: "instagram",
     name: "Instagram",
-    role: "사람과 현장",
+    role: "사람 · 현장 · 프로젝트 과정",
     type: "social",
     url: null,
     verified: false,

@@ -42,14 +42,6 @@ function omitEmpty(value: JsonLdObject): JsonLdObject {
 
 /** Person — 사이트 전역 엔티티 */
 export function personSchema(): JsonLdObject {
-  const knowsAbout = Array.from(
-    new Set([
-      person.primaryExpertise,
-      ...person.background,
-      ...person.currentAreas,
-    ]),
-  );
-
   return omitEmpty({
     "@type": "Person",
     "@id": PERSON_ID,
@@ -59,7 +51,7 @@ export function personSchema(): JsonLdObject {
     // 제공된 공식 직함(문자열)만 출력한다.
     // 기관 관계 객체는 공식 URL/사실관계 확인 후 verified 처리되면 자동으로 포함된다.
     jobTitle: person.officialRole.full,
-    knowsAbout,
+    knowsAbout: [...person.knowsAbout],
     url: absoluteUrl("/"),
     mainEntityOfPage: absoluteUrl("/about"),
     sameAs: person.sameAs,

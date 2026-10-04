@@ -13,7 +13,7 @@ export function ProjectsSection() {
       <SectionHeader
         eyebrow="BUILD"
         title="PROJECTS"
-        lead="만들고 있는 것과 만들어 온 것을 WHY · PROBLEM · BUILD · RESULT · NEXT 구조로 기록합니다."
+        lead="교육, 연구, 산업, 출판과 전문가 협업을 실제 프로젝트로 연결합니다."
       />
 
       <div className="mt-14">
@@ -33,7 +33,7 @@ export function ProjectsSection() {
         ) : (
           <EmptyState
             title="준비 중"
-            description="공개할 수 있는 프로젝트 정보가 확정되면 이 영역에 표시됩니다."
+            description="프로젝트 내용은 정리하고 있으며, 준비되는 대로 이 영역에 표시됩니다."
             action={
               <ActionLink href={routes.projects} variant="outline">
                 PROJECTS

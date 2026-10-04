@@ -2,6 +2,7 @@ import { BookCard } from "@/components/cards/BookCard";
 import { ActionLink, ArrowLink } from "@/components/ui/ActionLink";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Section, SectionHeader } from "@/components/ui/Section";
+import { siteConfig } from "@/config/site";
 import { getPublishedBooks } from "@/lib/content";
 import { routes } from "@/lib/routes";
 
@@ -13,7 +14,18 @@ export function BooksSection() {
       <SectionHeader
         eyebrow="KNOWLEDGE"
         title="BOOKS & PUBLICATIONS"
-        lead="저서와 출판물은 확인된 정보가 준비되는 대로 등록됩니다."
+        lead={
+          <div className="flex flex-col gap-3">
+            <p>
+              책은 {siteConfig.name}의 전문지식과 산업 연구가 축적되는 주요 지식
+              자산입니다.
+            </p>
+            <p>
+              쇼핑몰 창업과 이커머스에서 시작해 AI 이커머스, Vertical AI, 현장의
+              AI 활용과 Expert IP로 지식 영역을 확장하고 있습니다.
+            </p>
+          </div>
+        }
       />
 
       <div className="mt-14">
@@ -33,7 +45,7 @@ export function BooksSection() {
         ) : (
           <EmptyState
             title="준비 중"
-            description="도서 제목·출판사·출간일·ISBN 등 확인된 정보가 등록되면 이 영역에 표시됩니다."
+            description="도서 목록은 정리하고 있으며, 준비되는 대로 이 영역에 표시됩니다."
             action={
               <ActionLink href={routes.books} variant="outline">
                 BOOKS

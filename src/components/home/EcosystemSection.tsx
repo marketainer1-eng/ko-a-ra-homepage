@@ -1,10 +1,16 @@
-import { DraftNote } from "@/components/ui/DraftNote";
+import { EntityItem } from "@/components/cards/EntityItem";
+import { ArrowLink } from "@/components/ui/ActionLink";
 import { Section, SectionHeader } from "@/components/ui/Section";
+import { siteConfig } from "@/config/site";
 import { currentEcosystem } from "@/content/narrative";
+import { routes } from "@/lib/routes";
 
 /**
  * CURRENT ECOSYSTEM.
- * 기관 나열이 아니라 역할 중심으로 보여준다.
+ *
+ * 현재 어떤 역할과 영역에서 활동하는지를 보여준다.
+ * 각 기관은 독립된 Entity 이므로 하위 브랜드처럼 묶지 않고,
+ * 역할 영역별로 기관명과 실제 관계만 나란히 표시한다.
  */
 export function EcosystemSection() {
   return (
@@ -12,12 +18,15 @@ export function EcosystemSection() {
       <SectionHeader
         eyebrow="NOW"
         title="CURRENT ECOSYSTEM"
-        lead="지금의 활동 기반을 기관 이름이 아니라 역할을 중심으로 정리했습니다."
+        lead={`현재 활동하고 있는 역할과 영역입니다. 각 기관은 독립된 조직이며, 여기에는 ${siteConfig.name}와의 관계만 표시합니다.`}
       />
 
-      <dl className="border-charcoal/12 bg-charcoal/12 mt-14 grid gap-px border sm:grid-cols-2 lg:grid-cols-3">
+      <dl className="border-charcoal/12 bg-charcoal/12 mt-12 grid gap-px border sm:grid-cols-2 lg:mt-14 lg:grid-cols-3">
         {currentEcosystem.map((group) => (
-          <div key={group.key} className="flex flex-col gap-4 bg-white p-7">
+          <div
+            key={group.key}
+            className="flex flex-col gap-5 bg-white p-6 sm:p-7"
+          >
             <dt>
               <span className="font-display text-brand block text-xs font-semibold tracking-[0.16em] uppercase">
                 {group.label}
@@ -27,25 +36,34 @@ export function EcosystemSection() {
               </span>
             </dt>
             <dd>
-              <ul className="flex flex-col gap-2">
-                {group.entries.map((entry) => (
-                  <li
-                    key={entry.name}
-                    className="text-navy font-serif text-base leading-snug break-keep"
-                  >
-                    {entry.name}
-                  </li>
-                ))}
-              </ul>
+              {group.kind === "organization" ? (
+                <ul className="flex flex-col gap-4">
+                  {group.entries.map((entry) => (
+                    <li key={entry.name}>
+                      <EntityItem entry={entry} />
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <ul className="flex flex-wrap gap-x-4 gap-y-2">
+                  {group.entries.map((entry) => (
+                    <li
+                      key={entry.name}
+                      className="text-navy font-serif text-base font-medium break-keep sm:text-[1.0625rem]"
+                    >
+                      {entry.name}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </dd>
           </div>
         ))}
       </dl>
 
-      <DraftNote className="mt-12">
-        각 활동의 공식 URL과 상세 역할은 확인 후 추가됩니다. 확인되기 전까지
-        구조화 데이터(Schema)에는 기관 관계를 출력하지 않습니다.
-      </DraftNote>
+      <div className="mt-8">
+        <ArrowLink href={routes.about}>ABOUT · 기관과의 관계</ArrowLink>
+      </div>
     </Section>
   );
 }
