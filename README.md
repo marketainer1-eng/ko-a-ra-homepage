@@ -102,26 +102,34 @@ src/
 
 ## 환경 변수
 
-| 변수                   | 필요 시점             | 설명                                 |
-| ---------------------- | --------------------- | ------------------------------------ |
-| `NEXT_PUBLIC_SITE_URL` | 도메인 확정 후 (권장) | canonical · OG · sitemap 의 기준 URL |
+| 변수                   | 필요 시점              | 설명                                                      |
+| ---------------------- | ---------------------- | --------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL` | Production 배포 (필수) | canonical · OG · sitemap · robots · JSON-LD 의 기준 URL   |
+| `URL`                  | Netlify 자동 주입      | Production 배포에서 `NEXT_PUBLIC_SITE_URL` 미설정 시 사용 |
+| `DEPLOY_PRIME_URL`     | Netlify 자동 주입      | Deploy Preview · Branch deploy 의 기준 URL                |
 
-미설정 시 해석 순서: `NEXT_PUBLIC_SITE_URL` → Vercel 자동 주입 값
-(`NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL` / `NEXT_PUBLIC_VERCEL_URL`) →
-`http://localhost:3000` (개발 fallback, production 빌드 시 경고 출력).
+해석 순서 (`src/config/site.ts`):
 
-## Vercel Preview 배포
+1. `NEXT_PUBLIC_SITE_URL`
+2. Netlify 자동 주입 값 — Production(`CONTEXT=production`)은 `URL`,
+   Deploy Preview / Branch deploy 는 `DEPLOY_PRIME_URL`
+3. `http://localhost:3000` — 로컬 개발 환경에서만 허용한다.
+   Netlify/CI 빌드에서 기준 URL을 알 수 없으면 빌드가 실패한다.
 
-1. Vercel에서 **New Project → Import Git Repository → `ko-a-ra-homepage`** 선택
-   (이 저장소만 독립 프로젝트로 연결한다).
-2. 빌드 설정은 자동 감지값 그대로 둔다.
-   - Framework: Next.js / Build: `next build` / Install: `npm install`
-3. **환경변수는 필수가 아니다.** 설정하지 않으면 Preview 배포가 자기 자신의
-   배포 URL을 canonical/OG 기준으로 사용한다.
-   도메인이 확정되면 Production 환경에만 `NEXT_PUBLIC_SITE_URL` 을 추가한다.
-4. 커스텀 도메인은 아직 연결하지 않는다.
-5. `claude/...` 브랜치에 push하면 Preview 배포가 생성된다.
-   Vercel Preview는 기본적으로 `X-Robots-Tag: noindex` 가 적용되어 색인되지 않는다.
+## 개발 · 배포 흐름
+
+**Claude Code → GitHub → Netlify**
+
+1. Claude Code에서 작업 브랜치에 커밋하고 GitHub에 push한다.
+2. Netlify가 GitHub 저장소(`ko-a-ra-homepage`)를 감지해 빌드한다.
+   - 빌드 설정은 `netlify.toml` 에 있다 (`npm run build`, Node 22).
+   - Next.js는 Netlify가 자동 감지하므로 별도 plugin 설정을 추가하지 않는다.
+3. Pull Request / 브랜치는 Deploy Preview로 확인한다.
+   Preview는 환경변수 없이도 자기 자신의 배포 URL을 기준 URL로 사용한다.
+4. Production 배포 시에는 Netlify 환경변수에 `NEXT_PUBLIC_SITE_URL` 을
+   최종 공식 도메인으로 설정한다.
+
+Production 배포와 커스텀 도메인 연결은 아직 진행하지 않았다.
 
 ## 현재 상태 (Phase 1)
 

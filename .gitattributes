@@ -1,0 +1,15 @@
+# 모든 텍스트 파일은 저장소와 작업 트리 모두 LF 로 통일한다.
+# (Windows 의 core.autocrlf 설정과 무관하게 동일한 결과를 보장)
+* text=auto eol=lf
+
+# 바이너리
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.pdf binary

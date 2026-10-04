@@ -19,15 +19,34 @@ function stripTrailingSlash(value: string): string {
   return value.replace(/\/+$/, "");
 }
 
+const LOCAL_FALLBACK_URL = "http://localhost:3000";
+
+/**
+ * Netlify 가 빌드 시 주입하는 URL.
+ *
+ * - Production 배포(CONTEXT=production): URL (사이트 대표 주소)
+ * - Deploy Preview / Branch deploy: DEPLOY_PRIME_URL (해당 배포의 주소)
+ */
+function resolveNetlifyUrl(): string | null {
+  const primaryUrl = process.env.URL?.trim();
+  const deployUrl = process.env.DEPLOY_PRIME_URL?.trim();
+
+  if (process.env.CONTEXT === "production") {
+    return primaryUrl || deployUrl || null;
+  }
+  return deployUrl || primaryUrl || null;
+}
+
 /**
  * 배포 URL 해석 순서.
  *
  * 1. NEXT_PUBLIC_SITE_URL (직접 지정한 확정 도메인)
- * 2. Vercel 자동 주입 값 (Production 도메인 → Preview 배포 URL)
+ * 2. Netlify 자동 주입 값 (Production → URL, Preview → DEPLOY_PRIME_URL)
  * 3. 개발 환경 fallback (localhost)
  *
- * 도메인이 확정되면 1번만 설정하면 되고, 그 전까지 Vercel Preview는
- * 2번 경로로 자기 자신의 배포 URL을 canonical/OG에 사용한다.
+ * canonical · Open Graph · sitemap.xml · robots.txt · JSON-LD 는 모두
+ * 이 값(siteConfig.url) 하나를 기준으로 생성한다.
+ * 모든 페이지가 정적 생성되므로 이 값은 빌드 시점에 확정된다.
  */
 function resolveSiteUrl(): string {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();
@@ -35,27 +54,33 @@ function resolveSiteUrl(): string {
     return stripTrailingSlash(explicit);
   }
 
-  const productionHost =
-    process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL?.trim();
-  if (process.env.NEXT_PUBLIC_VERCEL_ENV === "production" && productionHost) {
-    return `https://${stripTrailingSlash(productionHost)}`;
+  // 브라우저 번들에서는 NEXT_PUBLIC_ 이외의 값을 읽을 수 없다.
+  // 클라이언트 컴포넌트는 url 을 사용하지 않으므로 여기서 멈춘다.
+  if (typeof window !== "undefined") {
+    return LOCAL_FALLBACK_URL;
   }
 
-  const deploymentHost =
-    process.env.NEXT_PUBLIC_VERCEL_URL?.trim() ??
-    process.env.VERCEL_URL?.trim();
-  if (deploymentHost) {
-    return `https://${stripTrailingSlash(deploymentHost)}`;
+  const netlifyUrl = resolveNetlifyUrl();
+  if (netlifyUrl) {
+    return stripTrailingSlash(netlifyUrl);
+  }
+
+  // localhost fallback 은 개발 환경에서만 허용한다.
+  // 배포 빌드(Netlify/CI)에서 기준 URL 을 알 수 없으면 빌드를 중단한다.
+  if (process.env.NETLIFY === "true" || process.env.CI) {
+    throw new Error(
+      "[site] 배포 URL 을 확인할 수 없습니다. NEXT_PUBLIC_SITE_URL 을 설정하세요.",
+    );
   }
 
   if (process.env.NODE_ENV === "production") {
     console.warn(
       "[site] NEXT_PUBLIC_SITE_URL 이 설정되지 않아 localhost 로 폴백합니다. " +
-        "배포 환경에서는 반드시 NEXT_PUBLIC_SITE_URL 을 설정하세요.",
+        "(로컬 빌드 확인용. 배포 환경에서는 허용되지 않습니다.)",
     );
   }
 
-  return "http://localhost:3000";
+  return LOCAL_FALLBACK_URL;
 }
 
 export const siteConfig = {
