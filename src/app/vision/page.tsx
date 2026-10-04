@@ -237,8 +237,9 @@ export default function VisionPage() {
           <div>
             <p className="label-caps text-brand">VERTICAL AI × EXPERT IP</p>
             <p className="text-navy mt-6 max-w-[40rem] font-serif text-[clamp(1.25rem,3.4vw,2rem)] leading-[1.5] font-medium break-keep">
-              산업은 Vertical AI로, 전문가는 Expert IP로. 두 구조는 산업과
-              전문가가 함께 성장하는 하나의 방향을 향합니다.
+              Vertical AI는 산업별 전문화를, Expert IP는 전문가 지식의 확장을
+              다룹니다. 두 구조는 교육·출판·콘텐츠·프로젝트를 통해 서로
+              연결됩니다.
             </p>
             <p className="text-charcoal/70 mt-5 max-w-[40rem] text-sm leading-[1.85] break-keep">
               이 방향에 이르게 된 이유는 STORY에서, 실제로 진행하는 일은

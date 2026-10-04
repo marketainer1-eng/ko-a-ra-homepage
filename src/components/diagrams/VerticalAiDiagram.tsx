@@ -27,15 +27,36 @@ export function VerticalAiDiagram({
         >
           FLOW
         </p>
-        <ol className="flex flex-wrap items-center gap-x-2 gap-y-2.5 sm:gap-x-2.5">
+        {/*
+          모바일: 세로형 (화살표 ↓ 가 단계 사이에 놓인다)
+          sm~: 가로형. 화살표를 각 단계 앞에 두어, 줄바꿈이 생겨도
+               줄 끝에 화살표만 남지 않는다.
+        */}
+        <ol className="flex flex-col gap-1.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-2.5 sm:gap-y-2.5">
           {verticalAiFlow.map((step, index) => {
-            const isLast = index === verticalAiFlow.length - 1;
+            const isFirst = index === 0;
 
             return (
-              <li key={step} className="flex items-center gap-2 sm:gap-2.5">
+              <li
+                key={step}
+                className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-2.5"
+              >
+                {!isFirst ? (
+                  <span
+                    aria-hidden="true"
+                    className={cn(
+                      "pl-4 text-sm leading-none sm:pl-0 sm:leading-normal",
+                      inverse ? "text-brand-soft/50" : "text-brand/50",
+                    )}
+                  >
+                    <span className="sm:hidden">↓</span>
+                    <span className="hidden sm:inline">→</span>
+                  </span>
+                ) : null}
+
                 <span
                   className={cn(
-                    "inline-flex min-h-10 items-center gap-2 border px-3 py-1.5 text-sm break-keep sm:min-h-11 sm:px-3.5 sm:py-2",
+                    "flex min-h-10 w-full max-w-64 items-center gap-2 border px-3.5 py-1.5 text-sm break-keep sm:inline-flex sm:min-h-11 sm:w-auto sm:max-w-none sm:py-2",
                     inverse
                       ? "border-white/15 bg-white/5 text-white"
                       : "border-charcoal/15 text-navy bg-white",
@@ -51,18 +72,6 @@ export function VerticalAiDiagram({
                   </span>
                   {step}
                 </span>
-
-                {!isLast ? (
-                  <span
-                    aria-hidden="true"
-                    className={cn(
-                      "text-sm",
-                      inverse ? "text-brand-soft/50" : "text-brand/50",
-                    )}
-                  >
-                    →
-                  </span>
-                ) : null}
               </li>
             );
           })}

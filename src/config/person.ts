@@ -70,7 +70,7 @@ export const person = {
   } satisfies OfficialRole,
 
   /** 전문성이 형성된 배경 (ABOUT 화면 표시용) */
-  background: ["쇼핑몰 창업", "온라인 판매", "온라인 마케팅", "이커머스 교육"],
+  background: ["온라인 판매", "쇼핑몰 창업", "온라인 마케팅", "이커머스 교육"],
 
   /** 현재 다루는 영역 (ABOUT 화면 표시용) */
   currentAreas: [
