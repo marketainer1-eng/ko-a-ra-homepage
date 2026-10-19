@@ -48,6 +48,7 @@ export function personSchema(): JsonLdObject {
     name: person.name,
     alternateName: person.alternateName,
     description: person.intro,
+    image: absoluteUrl(person.photo.src),
     // 제공된 공식 직함(문자열)만 출력한다.
     // 기관 관계 객체는 공식 URL/사실관계 확인 후 verified 처리되면 자동으로 포함된다.
     jobTitle: person.officialRole.full,
