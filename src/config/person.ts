@@ -59,6 +59,14 @@ export const person = {
       "교육·산업·연구·출판·미디어 프로젝트를 통해 AI와 이커머스가 만나는 영역을 확장하고 있습니다.",
   ],
 
+  /** 공식 프로필 사진 (public/ 기준 경로, 원본 1779×1969) */
+  photo: {
+    src: "/images/ko-a-ra-profile.jpg",
+    width: 1779,
+    height: 1969,
+    alt: `${BRAND_NAME_KO} 프로필 사진`,
+  },
+
   /** 공식 직함 */
   officialRole: {
     organization: "명지대학교",

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { ChannelCard } from "@/components/cards/ChannelCard";
 import { EntityItem } from "@/components/cards/EntityItem";
@@ -102,13 +103,24 @@ export default function AboutPage() {
           {/* 프로필 소개 */}
           <section aria-labelledby="about-intro">
             <SubHeading id="about-intro">소개</SubHeading>
-            <div className="mt-8 flex max-w-[46rem] flex-col gap-5">
-              <p className="text-navy font-serif text-[clamp(1.125rem,2.6vw,1.5rem)] leading-[1.7] font-medium break-keep">
-                {person.profile[0]}
-              </p>
-              <p className="text-charcoal/85 text-base leading-[1.95] break-keep sm:text-[1.0625rem]">
-                {person.profile[1]}
-              </p>
+            <div className="mt-8 grid gap-10 md:grid-cols-[minmax(0,15rem)_1fr] md:items-start lg:grid-cols-[minmax(0,18rem)_1fr] lg:gap-14">
+              <figure className="bg-charcoal/5 relative aspect-[4/5] w-full max-w-[18rem] overflow-hidden">
+                <Image
+                  src={person.photo.src}
+                  alt={person.photo.alt}
+                  fill
+                  sizes="(min-width: 1024px) 18rem, (min-width: 768px) 15rem, 18rem"
+                  className="object-cover object-[50%_20%]"
+                />
+              </figure>
+              <div className="flex max-w-[46rem] flex-col gap-5">
+                <p className="text-navy font-serif text-[clamp(1.125rem,2.6vw,1.5rem)] leading-[1.7] font-medium break-keep">
+                  {person.profile[0]}
+                </p>
+                <p className="text-charcoal/85 text-base leading-[1.95] break-keep sm:text-[1.0625rem]">
+                  {person.profile[1]}
+                </p>
+              </div>
             </div>
           </section>
 
