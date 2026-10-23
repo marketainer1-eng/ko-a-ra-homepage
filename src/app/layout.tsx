@@ -40,6 +40,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  verification: {
+    other: {
+      // 네이버 Search Advisor 사이트 소유확인
+      "naver-site-verification": "9d65316633c2b6122472285057a9d6d738254181",
+    },
+  },
   robots: {
     index: true,
     follow: true,
