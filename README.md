@@ -126,10 +126,10 @@ src/
    - Next.js는 Netlify가 자동 감지하므로 별도 plugin 설정을 추가하지 않는다.
 3. Pull Request / 브랜치는 Deploy Preview로 확인한다.
    Preview는 환경변수 없이도 자기 자신의 배포 URL을 기준 URL로 사용한다.
-4. Production 배포 시에는 Netlify 환경변수에 `NEXT_PUBLIC_SITE_URL` 을
-   최종 공식 도메인으로 설정한다.
+4. Production 배포의 `NEXT_PUBLIC_SITE_URL` 은 `netlify.toml` 에서
+   `https://ko-a-ra-homepage.netlify.app` 으로 지정되어 있다.
 
-Production 배포와 커스텀 도메인 연결은 아직 진행하지 않았다.
+커스텀 도메인 연결은 아직 진행하지 않았다.
 
 ## 현재 상태 (Phase 2-A)
 

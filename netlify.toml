@@ -6,3 +6,7 @@
 
 [build.environment]
   NODE_VERSION = "22"
+
+# 공식 기준 URL (canonical · OG · sitemap · robots · JSON-LD)
+[context.production.environment]
+  NEXT_PUBLIC_SITE_URL = "https://ko-a-ra-homepage.netlify.app"
