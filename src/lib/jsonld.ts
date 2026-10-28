@@ -48,6 +48,7 @@ export function personSchema(): JsonLdObject {
     name: person.name,
     alternateName: person.alternateName,
     description: person.intro,
+    image: absoluteUrl(person.photo.src),
     // 제공된 공식 직함(문자열)만 출력한다.
     // 기관 관계 객체는 공식 URL/사실관계 확인 후 verified 처리되면 자동으로 포함된다.
     jobTitle: person.officialRole.full,
@@ -122,14 +123,20 @@ export function bookSchema(book: Book): JsonLdObject | null {
     url: absoluteUrl(bookPath(book.slug)),
     author:
       book.authors.length > 0
-        ? book.authors.map((name) => ({ "@type": "Person", name }))
+        ? book.authors.map((name) =>
+            name === person.name
+              ? { "@id": PERSON_ID }
+              : { "@type": "Person", name },
+          )
         : [{ "@id": PERSON_ID }],
     publisher: book.publisher
       ? { "@type": "Organization", name: book.publisher }
       : null,
     datePublished: book.publicationDate,
     isbn: book.isbn,
+    image: book.cover ? absoluteUrl(book.cover.src) : null,
     description: book.description,
+    sameAs: book.externalLinks.flatMap((link) => (link.url ? [link.url] : [])),
     inLanguage: "ko-KR",
   });
 }

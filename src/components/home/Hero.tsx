@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ActionLink } from "@/components/ui/ActionLink";
 import { Container } from "@/components/ui/Container";
 import { person } from "@/config/person";
@@ -16,9 +17,7 @@ const narrativeAnchors = [
  * 가장 먼저 인식되어야 하는 관계: 고아라 = AI 이커머스
  * → h1 안에 KO A RA / AI E-COMMERCE / AI 이커머스 전문가 고아라 를 함께 둔다.
  *
- * 프로필 사진은 제공되지 않았으므로 가짜 인물 사진을 사용하지 않는다.
- * 오른쪽 패널은 사진 없이도 완성되어 보이도록 PAST → PRESENT → FUTURE 서사
- * 목차로 구성했고, 사진이 준비되면 같은 자리에 넣을 수 있다.
+ * 오른쪽 열은 공식 프로필 사진과 PAST → PRESENT → FUTURE 서사 목차로 구성한다.
  */
 export function Hero() {
   return (
@@ -58,48 +57,57 @@ export function Hero() {
             </div>
           </div>
 
-          {/*
-            브랜드 패널 (데스크톱).
-            프로필 사진이 준비되면 이 패널 상단에 next/image 로 추가하면 된다.
-            (가짜 인물 사진이나 스톡 이미지를 넣지 않는다)
-          */}
-          <nav
-            aria-label="HOME 서사 순서"
-            className="bg-navy relative hidden flex-col justify-between gap-16 p-10 text-white lg:flex xl:p-12"
-          >
-            <span
-              aria-hidden="true"
-              className="bg-brand absolute top-0 left-0 h-1 w-24"
-            />
-            <p className="label-caps text-brand-soft/80">{siteConfig.name}</p>
+          <div className="flex flex-col">
+            <figure className="bg-navy relative mx-auto w-full max-w-sm lg:max-w-none">
+              <span
+                aria-hidden="true"
+                className="bg-brand absolute top-0 left-0 z-10 h-1 w-24"
+              />
+              <div className="relative aspect-[4/5] w-full overflow-hidden">
+                <Image
+                  src={person.photo.src}
+                  alt={person.photo.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 36vw, (min-width: 640px) 384px, 100vw"
+                  className="object-cover object-[50%_20%]"
+                />
+              </div>
+            </figure>
 
-            <ol className="flex flex-col">
-              {narrativeAnchors.map((anchor) => (
-                <li
-                  key={anchor.href}
-                  className="border-t border-white/12 last:border-b"
-                >
-                  <a
-                    href={anchor.href}
-                    className="group flex flex-col gap-2 py-5 transition-colors"
+            {/* 서사 목차 (데스크톱) */}
+            <nav
+              aria-label="HOME 서사 순서"
+              className="bg-navy hidden flex-col px-10 pt-2 pb-4 text-white lg:flex xl:px-12"
+            >
+              <ol className="flex flex-col">
+                {narrativeAnchors.map((anchor) => (
+                  <li
+                    key={anchor.href}
+                    className="border-t border-white/12 first:border-t-0"
                   >
-                    <span className="label-caps text-brand-soft/70 group-hover:text-brand-soft">
-                      {anchor.label}
-                    </span>
-                    <span className="font-display text-[0.95rem] leading-snug font-semibold tracking-[0.08em] break-keep text-white">
-                      {anchor.summary}
-                      <span
-                        aria-hidden="true"
-                        className="text-brand-soft/60 ml-2 inline-block transition-transform group-hover:translate-y-0.5"
-                      >
-                        ↓
+                    <a
+                      href={anchor.href}
+                      className="group flex flex-col gap-1.5 py-4 transition-colors"
+                    >
+                      <span className="label-caps text-brand-soft/70 group-hover:text-brand-soft">
+                        {anchor.label}
                       </span>
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ol>
-          </nav>
+                      <span className="font-display text-[0.95rem] leading-snug font-semibold tracking-[0.08em] break-keep text-white">
+                        {anchor.summary}
+                        <span
+                          aria-hidden="true"
+                          className="text-brand-soft/60 ml-2 inline-block transition-transform group-hover:translate-y-0.5"
+                        >
+                          ↓
+                        </span>
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </div>
         </div>
 
         {/* 모바일·태블릿용 서사 목차 (데스크톱에서는 위 패널이 대신한다) */}

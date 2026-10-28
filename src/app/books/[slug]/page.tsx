@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ArrowLink } from "@/components/ui/ActionLink";
 import { Container } from "@/components/ui/Container";
-import { DraftNote } from "@/components/ui/DraftNote";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { getBookBySlug, getBooks } from "@/lib/content";
@@ -82,13 +82,25 @@ export default async function BookDetailPage(
       <article className="bg-ivory py-20 sm:py-24 lg:py-28">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[0.6fr_1fr] lg:gap-16">
-            {/* 표지 이미지가 확정되면 next/image 로 교체한다 */}
-            <div
-              aria-hidden="true"
-              className="border-charcoal/20 flex aspect-3/4 w-full max-w-xs items-center justify-center border border-dashed bg-white"
-            >
-              <span className="label-caps text-charcoal/62">COVER</span>
-            </div>
+            {book.cover ? (
+              <div className="border-charcoal/12 relative aspect-3/4 w-full max-w-xs overflow-hidden border bg-white">
+                <Image
+                  src={book.cover.src}
+                  alt={book.cover.alt}
+                  fill
+                  priority
+                  sizes="320px"
+                  className="object-cover"
+                />
+              </div>
+            ) : (
+              <div
+                aria-hidden="true"
+                className="border-charcoal/20 flex aspect-3/4 w-full max-w-xs items-center justify-center border border-dashed bg-white"
+              >
+                <span className="label-caps text-charcoal/62">COVER</span>
+              </div>
+            )}
 
             <div>
               {knownFacts.length > 0 ? (
@@ -110,9 +122,7 @@ export default async function BookDetailPage(
                 </dl>
               ) : (
                 <p className="border-charcoal/20 text-charcoal/70 border border-dashed p-6 text-sm leading-[1.9] break-keep">
-                  저자·출판사·출간일·ISBN 등 확인된 도서 정보가 아직 없습니다.
-                  정보가 확정되면 이 영역에 표시되고, published 상태가 되면 Book
-                  구조화 데이터도 함께 출력됩니다.
+                  저자·출판사·출간일·ISBN 등 상세 도서 정보는 준비 중입니다.
                 </p>
               )}
 
@@ -146,12 +156,7 @@ export default async function BookDetailPage(
             </div>
           </div>
 
-          <DraftNote className="mt-14">
-            이 페이지는 도서 상세 템플릿 확인용 placeholder 입니다. 실제 도서
-            정보(제목, ISBN, 출간일 등)는 확인된 자료로만 등록합니다.
-          </DraftNote>
-
-          <div className="border-charcoal/12 mt-12 border-t pt-8">
+          <div className="border-charcoal/12 mt-14 border-t pt-8">
             <ArrowLink href={routes.books}>ALL BOOKS</ArrowLink>
           </div>
         </Container>

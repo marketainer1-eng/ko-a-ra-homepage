@@ -40,6 +40,14 @@ export const person = {
   /** 이름을 뺀 포지셔닝 (ABOUT 기준정보용) */
   positioningLabel: "AI 이커머스 전문가",
 
+  /** 공식 프로필 사진 (public/profile/) */
+  photo: {
+    src: "/profile/ko-a-ra.jpg",
+    alt: `AI 이커머스 전문가 ${BRAND_NAME_KO} 프로필 사진`,
+    width: 1400,
+    height: 1550,
+  },
+
   /** 대표 전문분야 */
   primaryExpertise: "AI 이커머스",
 
