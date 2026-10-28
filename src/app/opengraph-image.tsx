@@ -8,6 +8,9 @@ import { siteConfig } from "@/config/site";
  * (satori 기본 폰트에 한글 글리프가 없어 이미지에는 영문만 사용한다.
  *  핵심 정보는 모두 HTML 텍스트로도 존재한다.)
  */
+/** 빌드 때 한 번만 생성한다 (정적 HTML 내보내기 지원) */
+export const dynamic = "force-static";
+
 export const alt = `${siteConfig.name} — AI E-COMMERCE`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

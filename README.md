@@ -28,16 +28,17 @@ npm install
 npm run dev     # http://localhost:3000
 ```
 
-| 명령                   | 설명                                 |
-| ---------------------- | ------------------------------------ |
-| `npm run dev`          | 개발 서버                            |
-| `npm run build`        | 프로덕션 빌드                        |
-| `npm run start`        | 빌드 결과 실행                       |
-| `npm run lint`         | ESLint 검사                          |
-| `npm run typecheck`    | `next typegen` + `tsc --noEmit`      |
-| `npm run format`       | Prettier 포맷 적용                   |
-| `npm run format:check` | Prettier 포맷 검사                   |
-| `npm run check`        | lint + typecheck + format:check 일괄 |
+| 명령                   | 설명                                              |
+| ---------------------- | ------------------------------------------------- |
+| `npm run dev`          | 개발 서버                                         |
+| `npm run build`        | 프로덕션 빌드                                     |
+| `npm run build:static` | 정적 HTML 내보내기(`out/`, 드래그 앤 드롭 배포용) |
+| `npm run start`        | 빌드 결과 실행                                    |
+| `npm run lint`         | ESLint 검사                                       |
+| `npm run typecheck`    | `next typegen` + `tsc --noEmit`                   |
+| `npm run format`       | Prettier 포맷 적용                                |
+| `npm run format:check` | Prettier 포맷 검사                                |
+| `npm run check`        | lint + typecheck + format:check 일괄              |
 
 ## URL 구조
 
