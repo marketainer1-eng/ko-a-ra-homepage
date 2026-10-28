@@ -3,6 +3,7 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { ChannelCard } from "@/components/cards/ChannelCard";
 import { EntityItem } from "@/components/cards/EntityItem";
+import { FieldGallery } from "@/components/gallery/FieldGallery";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ActionLink } from "@/components/ui/ActionLink";
 import { Container } from "@/components/ui/Container";
@@ -10,6 +11,7 @@ import { DraftNote } from "@/components/ui/DraftNote";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { person } from "@/config/person";
 import { siteConfig } from "@/config/site";
+import { fieldPhotos } from "@/content/field";
 import {
   currentEcosystem,
   expertiseAreas,
@@ -178,6 +180,16 @@ export default function AboutPage() {
                 </li>
               ))}
             </ol>
+          </section>
+
+          {/* 강의 현장 */}
+          <section aria-labelledby="about-field" className="mt-16 lg:mt-20">
+            <SubHeading id="about-field">강의 현장</SubHeading>
+            <p className="text-charcoal/70 mt-5 max-w-[40rem] text-sm leading-[1.8] break-keep">
+              대학 평생교육원, 기업·기관 교육, 창업 지원 프로그램에서 쇼핑몰
+              창업과 이커머스 실무를 강의해 온 현장입니다.
+            </p>
+            <FieldGallery photos={fieldPhotos} className="mt-8" />
           </section>
 
           {/* 연계기관 */}
