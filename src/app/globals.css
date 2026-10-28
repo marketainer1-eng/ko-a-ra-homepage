@@ -3,21 +3,30 @@
 /* ------------------------------------------------------------------ *
  * KO A RA — Design Tokens
  *
- * Editorial 50% / AI · Tech 30% / Academic 20%
- * Deep Navy 와 Editorial Ivory 를 큰 면적에 사용하고,
- * KO A RA BLUE 는 링크·버튼·숫자·라인·강조·아이콘·상태 표시에 반복 사용한다.
+ * 『AI 미디어 커머스 트렌드 2027』 표지 톤에 맞춘다.
+ * - 표지 바탕 남색(#171D59)과 흰 띠를 큰 면적에 사용한다.
+ * - 제목 그라데이션(하늘 #2CABD2 → 보라 #978BA8 → 분홍 #E16F88)은
+ *   큰 제목·짧은 라인에만 쓴다 (text-cover-gradient / bg-cover-gradient).
+ * - 밝은 배경의 글자·링크·버튼은 대비 4.5:1 이상인 brand(#1173B0)를 쓰고,
+ *   남색 배경에서는 brand-bright / brand-soft 를 쓴다.
  * ------------------------------------------------------------------ */
 @theme {
-  /* KO A RA BLUE — Signature Color */
-  --color-brand: #1457d9;
-  /* Soft Blue */
-  --color-brand-soft: #eaf1ff;
-  /* Deep Navy */
-  --color-navy: #081a33;
-  /* Editorial Ivory */
-  --color-ivory: #f7f5ef;
-  /* Charcoal */
-  --color-charcoal: #20242b;
+  /* Cover Cyan (밝은 배경용 진한 톤) — Signature Color */
+  --color-brand: #1173b0;
+  /* Cover Cyan (남색 배경·그라데이션용) */
+  --color-brand-bright: #2cabd2;
+  /* Soft Cyan */
+  --color-brand-soft: #e3f3f9;
+  /* Cover Pink (남색 배경·그라데이션용) */
+  --color-accent: #e16f88;
+  /* Cover Pink (밝은 배경 글자용 진한 톤) */
+  --color-accent-ink: #b83e60;
+  /* Cover Navy */
+  --color-navy: #171d59;
+  /* Cover White Band (살짝 푸른 흰색) */
+  --color-ivory: #f5f6fa;
+  /* Charcoal (남색 기운) */
+  --color-charcoal: #1f2340;
 
   /*
    * 본문/UI: Pretendard 우선, 없으면 각 OS의 한글 산세리프로 폴백한다.
@@ -92,6 +101,29 @@
   line-height: 1;
   letter-spacing: 0.22em;
   text-transform: uppercase;
+}
+
+/* 표지 제목 그라데이션 (큰 제목 전용) */
+@utility text-cover-gradient {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-brand-bright) 0%,
+    #978ba8 50%,
+    var(--color-accent) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* 표지 세로선처럼 쓰는 짧은 그라데이션 라인 */
+@utility bg-cover-gradient {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-brand-bright) 0%,
+    #978ba8 50%,
+    var(--color-accent) 100%
+  );
 }
 
 /* KO A RA 워드마크 */

@@ -43,12 +43,20 @@ export function getFeaturedStories(): Story[] {
 
 /* ------------------------------ BOOK ------------------------------ */
 
+/** 출간일 최신순. 출간일이 없는 책은 뒤로 보낸다. */
+function byNewestBook(a: Book, b: Book): number {
+  if (a.publicationDate === b.publicationDate) return 0;
+  if (a.publicationDate === null) return 1;
+  if (b.publicationDate === null) return -1;
+  return b.publicationDate.localeCompare(a.publicationDate);
+}
+
 export function getBooks(): Book[] {
-  return books;
+  return [...books].sort(byNewestBook);
 }
 
 export function getPublishedBooks(): Book[] {
-  return books.filter(isPublished);
+  return getBooks().filter(isPublished);
 }
 
 export function getBookBySlug(slug: string): Book | undefined {

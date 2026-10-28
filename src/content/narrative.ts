@@ -4,7 +4,7 @@
  * 모든 항목은 실제 HTML 텍스트로 렌더링된다.
  * (통이미지로 만들지 않는다 — SEO/GEO/접근성/반응형을 위해)
  *
- * 연도·성과·수치는 확인된 정보가 없으므로 넣지 않는다.
+ * 연도는 본인 제공 강사 프로필(2026)에서 확인된 것만 넣는다. 성과·수치는 넣지 않는다.
  * 미래의 방향(FUTURE)을 이미 달성한 사실처럼 서술하지 않는다.
  */
 
@@ -27,17 +27,29 @@ export const pastToPresent =
 export interface TimelineStep {
   id: string;
   label: string;
-  /** 연도. 확인 전에는 null (임의로 채우지 않는다) */
+  /** 시작 연도와 근거. 확인 전에는 null (임의로 채우지 않는다) */
   period: string | null;
 }
 
 export const pastTimeline: TimelineStep[] = [
-  { id: "online-selling", label: "온라인 판매", period: null },
-  { id: "shopping-mall", label: "쇼핑몰 창업", period: null },
-  { id: "online-marketing", label: "온라인 마케팅", period: null },
-  { id: "ecommerce-education", label: "이커머스 교육", period: null },
-  { id: "industry-association", label: "산업·협회 활동", period: null },
-  { id: "ai-ecommerce", label: "AI × E-Commerce", period: null },
+  { id: "online-selling", label: "온라인 판매", period: "2005~" },
+  { id: "shopping-mall", label: "쇼핑몰 창업", period: "2005 · 내발꼬락" },
+  {
+    id: "online-marketing",
+    label: "온라인 마케팅",
+    period: "2013 · 비즈온컴퍼니",
+  },
+  {
+    id: "ecommerce-education",
+    label: "이커머스 교육",
+    period: "2009~ · 강의 17년",
+  },
+  {
+    id: "industry-association",
+    label: "산업·협회 활동",
+    period: "2022 · 한국쇼핑몰협회",
+  },
+  { id: "ai-ecommerce", label: "AI × E-Commerce", period: "2025 · 명지대학교" },
 ];
 
 /* ------------------------------------------------------------------ *
@@ -166,6 +178,8 @@ export const currentEcosystem: EcosystemGroup[] = [
       organization("AI 이커머스학과", {
         parent: "명지대학교 테크노아트대학원",
         relation: "주임교수",
+        url: "https://aiecommerce.re.kr",
+        verified: true,
       }),
     ],
   },
@@ -186,8 +200,16 @@ export const currentEcosystem: EcosystemGroup[] = [
     caption: "산업 · 협회",
     kind: "organization",
     entries: [
-      organization("한국쇼핑몰협회", { relation: "설립" }),
-      organization("AI 에이전트협회", { relation: "설립" }),
+      organization("한국쇼핑몰협회", {
+        relation: "설립 · 협회장",
+        url: "https://hkspmh.or.kr",
+        verified: true,
+      }),
+      organization("AI 에이전트협회", {
+        relation: "설립 · 협회장",
+        url: "https://aiagent.io.kr",
+        verified: true,
+      }),
       organization("한국버티컬AI협회", { relation: "설립" }),
       organization("크리에이터 커머스 협회", { relation: "설립" }),
     ],
@@ -204,7 +226,16 @@ export const currentEcosystem: EcosystemGroup[] = [
     label: "MEDIA",
     caption: "산업 미디어",
     kind: "organization",
-    entries: [organization("한국쇼핑몰신문"), organization("AI에이전트타임즈")],
+    entries: [
+      organization("한국쇼핑몰신문", {
+        url: "https://www.hkspmh.com/",
+        verified: true,
+      }),
+      organization("AI에이전트타임즈", {
+        url: "http://aiagentimes.hosting2003.co.kr/",
+        verified: true,
+      }),
+    ],
   },
   {
     key: "knowledge",

@@ -96,7 +96,7 @@ export default async function ProjectDetailPage(
                   <div>
                     <p className="label-caps text-charcoal/65">{section.ko}</p>
                     {value ? (
-                      <p className="text-charcoal/85 mt-4 text-[1.0625rem] leading-[2] break-keep">
+                      <p className="text-charcoal/85 mt-4 text-[1.0625rem] leading-[2] break-keep whitespace-pre-line">
                         {value}
                       </p>
                     ) : (
@@ -110,10 +110,12 @@ export default async function ProjectDetailPage(
             })}
           </div>
 
-          <DraftNote className="mt-14">
-            이 페이지는 프로젝트 상세 템플릿 확인용 placeholder 입니다. 실제
-            프로젝트 내용과 성과는 확인된 사실만 기록합니다.
-          </DraftNote>
+          {project.status === "draft" ? (
+            <DraftNote className="mt-14">
+              이 프로젝트는 draft 상태입니다. 실제 프로젝트 내용과 성과는 확인된
+              사실만 기록합니다.
+            </DraftNote>
+          ) : null}
 
           <div className="border-charcoal/12 mt-12 border-t pt-8">
             <ArrowLink href={routes.projects}>ALL PROJECTS</ArrowLink>
