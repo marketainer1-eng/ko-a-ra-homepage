@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ArrowLink } from "@/components/ui/ActionLink";
 import { Container } from "@/components/ui/Container";
-import { DraftNote } from "@/components/ui/DraftNote";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { StatusBadge } from "@/components/ui/StatusBadge";
-import { getBookBySlug, getBooks } from "@/lib/content";
+import { getBookAuthorship, getBookBySlug, getBooks } from "@/lib/content";
 import { bookSchema, breadcrumbSchema, jsonLdGraph } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/metadata";
 import { bookPath, routes } from "@/lib/routes";
@@ -32,7 +32,11 @@ export async function generateMetadata(
 
   return buildMetadata({
     title: book.title,
-    description: book.description ?? `${book.title} — 도서 정보 준비 중입니다.`,
+    description:
+      book.description ??
+      [book.title, book.subtitle, book.authors.join(", "), book.publisher]
+        .filter(Boolean)
+        .join(" · "),
     path: bookPath(book.slug),
     noindex: book.status !== "published",
   });
@@ -58,11 +62,12 @@ export default async function BookDetailPage(
     { term: "저자", value: book.authors.join(", ") || null },
     { term: "출판사", value: book.publisher },
     {
-      term: "출간일",
+      term: "출간",
       value: book.publicationDate,
       dateTime: book.publicationDate ?? undefined,
     },
     { term: "ISBN", value: book.isbn },
+    { term: "구분", value: getBookAuthorship(book) },
     { term: "분류", value: book.category },
   ];
 
@@ -82,13 +87,25 @@ export default async function BookDetailPage(
       <article className="bg-ivory py-20 sm:py-24 lg:py-28">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[0.6fr_1fr] lg:gap-16">
-            {/* 표지 이미지가 확정되면 next/image 로 교체한다 */}
-            <div
-              aria-hidden="true"
-              className="border-charcoal/20 flex aspect-3/4 w-full max-w-xs items-center justify-center border border-dashed bg-white"
-            >
-              <span className="label-caps text-charcoal/62">COVER</span>
-            </div>
+            {book.cover ? (
+              <div className="relative aspect-3/4 w-full max-w-xs">
+                <Image
+                  src={book.cover.src}
+                  alt={book.cover.alt}
+                  fill
+                  priority
+                  sizes="320px"
+                  className="object-contain object-top drop-shadow-[0_10px_24px_rgba(0,0,0,0.18)]"
+                />
+              </div>
+            ) : (
+              <div
+                aria-hidden="true"
+                className="border-charcoal/20 flex aspect-3/4 w-full max-w-xs items-center justify-center border border-dashed bg-white"
+              >
+                <span className="label-caps text-charcoal/62">COVER</span>
+              </div>
+            )}
 
             <div>
               {knownFacts.length > 0 ? (
@@ -145,11 +162,6 @@ export default async function BookDetailPage(
               ) : null}
             </div>
           </div>
-
-          <DraftNote className="mt-14">
-            이 페이지는 도서 상세 템플릿 확인용 placeholder 입니다. 실제 도서
-            정보(제목, ISBN, 출간일 등)는 확인된 자료로만 등록합니다.
-          </DraftNote>
 
           <div className="border-charcoal/12 mt-12 border-t pt-8">
             <ArrowLink href={routes.books}>ALL BOOKS</ArrowLink>

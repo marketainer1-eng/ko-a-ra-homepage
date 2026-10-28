@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { BookCard } from "@/components/cards/BookCard";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
-import { DraftNote } from "@/components/ui/DraftNote";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { getBooks } from "@/lib/content";
@@ -18,7 +17,7 @@ const breadcrumbs = [
 export const metadata: Metadata = buildMetadata({
   title: "BOOKS",
   description:
-    "고아라(KO A RA)의 저서와 출판물. 확인된 도서 정보가 등록되는 대로 순차적으로 공개됩니다.",
+    "고아라(KO A RA)의 저서와 출판물. 2012년 『오픈마켓 광고 이기는 전략』부터 AI 이커머스·AI 활용 분야까지 단독·공저 도서를 소개합니다.",
   path: routes.books,
 });
 
@@ -31,7 +30,7 @@ export default function BooksPage() {
         eyebrow="KNOWLEDGE"
         title="BOOKS"
         titleKo="저서와 출판물"
-        lead="도서 정보는 제목·출판사·출간일·ISBN 등 확인된 사실만 등록합니다."
+        lead={`2012년부터 지금까지 펴낸 ${books.length}권의 단독·공저 도서입니다. 오픈마켓과 소셜 마케팅에서 시작해 AI 이커머스와 현장의 AI 활용으로 이어집니다.`}
         breadcrumbs={breadcrumbs}
       />
 
@@ -51,12 +50,6 @@ export default function BooksPage() {
               description="확인된 도서 정보가 등록되면 이 목록에 표시됩니다."
             />
           )}
-
-          <DraftNote className="mt-14">
-            현재 목록은 상세 페이지 구조 확인을 위한 placeholder 이며 draft
-            상태입니다. draft 도서는 noindex 처리되고 sitemap 에서 제외됩니다.
-            Book 구조화 데이터는 published 상태의 도서에만 출력됩니다.
-          </DraftNote>
         </Container>
       </section>
 

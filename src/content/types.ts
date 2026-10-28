@@ -38,7 +38,7 @@ export interface Book {
   subtitle: string | null;
   authors: string[];
   publisher: string | null;
-  /** ISO 8601 (YYYY-MM-DD). 확정 전에는 null */
+  /** ISO 8601 (YYYY-MM-DD, 연도만 확인된 경우 YYYY). 확정 전에는 null */
   publicationDate: string | null;
   isbn: string | null;
   /** 표지 이미지 경로. 없으면 null → placeholder 렌더링 */
