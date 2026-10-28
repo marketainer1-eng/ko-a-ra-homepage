@@ -94,7 +94,6 @@ export default function AboutPage() {
         eyebrow="ABOUT"
         title="ABOUT"
         titleKo={person.positioning}
-        lead="현재 공식적으로 누구이며, 어떤 전문영역에서 활동하는지를 정리한 기준 정보입니다."
         breadcrumbs={breadcrumbs}
       />
 
