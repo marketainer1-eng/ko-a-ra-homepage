@@ -134,6 +134,7 @@ export function bookSchema(book: Book): JsonLdObject | null {
       : null,
     datePublished: book.publicationDate,
     isbn: book.isbn,
+    numberOfPages: book.pages ?? null,
     image: book.cover ? absoluteUrl(book.cover.src) : null,
     description: book.description,
     sameAs: book.externalLinks.flatMap((link) => (link.url ? [link.url] : [])),

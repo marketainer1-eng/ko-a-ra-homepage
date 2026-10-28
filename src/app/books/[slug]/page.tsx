@@ -63,6 +63,8 @@ export default async function BookDetailPage(
       dateTime: book.publicationDate ?? undefined,
     },
     { term: "ISBN", value: book.isbn },
+    { term: "쪽수", value: book.pages ? `${book.pages}쪽` : null },
+    { term: "무게 · 크기", value: book.physical ?? null },
     { term: "분류", value: book.category },
   ];
 
