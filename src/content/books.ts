@@ -9,6 +9,29 @@ import type { Book } from "@/content/types";
  */
 export const books: Book[] = [
   {
+    slug: "ai-media-commerce-trend-2027",
+    title: "AI 미디어 커머스 트렌드 2027",
+    subtitle: null,
+    authors: ["고아라", "김한준", "장도균", "정유진", "백종우", "배현진"],
+    publisher: "나비의활주로",
+    publicationDate: "2026-10-30",
+    isbn: "9791124401422",
+    cover: {
+      src: "/books/ai-media-commerce-trend-2027.jpg",
+      alt: "『AI 미디어 커머스 트렌드 2027』 표지",
+    },
+    description:
+      "AI가 검색하고, 비교하고, 구매하는 시대. 2027년 시장의 새로운 규칙을 10가지 키워드로 읽고, AI가 먼저 읽고 판단하는 환경에서 브랜드가 선택받는 방법과 소상공인·1인 기업의 대응 방안을 제시한다.",
+    category: "AI 트렌드",
+    externalLinks: [
+      {
+        label: "YES24",
+        url: "https://www.yes24.com/Product/Goods/198929807",
+      },
+    ],
+    status: "published",
+  },
+  {
     slug: "ai-recommends-next-store",
     title: "AI는 왜 옆 가게만 추천할까?",
     subtitle: null,
