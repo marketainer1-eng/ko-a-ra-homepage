@@ -88,3 +88,11 @@ export function isLinkable(channel: {
 }): channel is { url: string; verified: true } {
   return channel.verified && typeof channel.url === "string";
 }
+
+/* --------------------------- BOOK HELPERS --------------------------- */
+
+/** 저자 수로 단독/공저를 구분한다. 저자 정보가 없으면 null */
+export function getBookAuthorship(book: Book): "단독" | "공저" | null {
+  if (book.authors.length === 0) return null;
+  return book.authors.length === 1 ? "단독" : "공저";
+}
