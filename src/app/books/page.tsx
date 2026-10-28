@@ -18,7 +18,7 @@ const breadcrumbs = [
 export const metadata: Metadata = buildMetadata({
   title: "BOOKS",
   description:
-    "고아라(KO A RA)의 저서와 출판물. 확인된 도서 정보가 등록되는 대로 순차적으로 공개됩니다.",
+    "고아라(KO A RA)의 저서와 출판물. AI 이커머스, AI 검색·GEO, 소상공인 AI 활용, 쇼핑몰 창업, 바이브코딩, 책쓰기.",
   path: routes.books,
 });
 
@@ -52,11 +52,12 @@ export default function BooksPage() {
             />
           )}
 
-          <DraftNote className="mt-14">
-            현재 목록은 상세 페이지 구조 확인을 위한 placeholder 이며 draft
-            상태입니다. draft 도서는 noindex 처리되고 sitemap 에서 제외됩니다.
-            Book 구조화 데이터는 published 상태의 도서에만 출력됩니다.
-          </DraftNote>
+          {books.some((book) => book.status === "draft") ? (
+            <DraftNote className="mt-14">
+              draft 도서는 noindex 처리되고 sitemap 에서 제외됩니다. Book 구조화
+              데이터는 published 상태의 도서에만 출력됩니다.
+            </DraftNote>
+          ) : null}
         </Container>
       </section>
 

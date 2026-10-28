@@ -48,6 +48,12 @@ export function BookCard({
         ) : null}
 
         <dl className="text-charcoal/65 mt-4 flex flex-col gap-1 text-[0.8125rem]">
+          {book.authors.length > 0 ? (
+            <div className="flex gap-2">
+              <dt className="text-charcoal/65">저자</dt>
+              <dd>{book.authors.join(", ")}</dd>
+            </div>
+          ) : null}
           {book.publisher ? (
             <div className="flex gap-2">
               <dt className="text-charcoal/65">출판사</dt>
