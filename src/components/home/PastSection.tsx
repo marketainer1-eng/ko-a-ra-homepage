@@ -1,12 +1,13 @@
 import { PastTimeline } from "@/components/diagrams/PastTimeline";
+import { FieldHighlights } from "@/components/home/FieldHighlights";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { pastExpansion, pastOrigin, pastToPresent } from "@/content/narrative";
 
 /**
  * PAST — 어디에서 시작했는가.
  *
- * 출발점 → 확장 과정 → 타임라인 → (PRESENT 로 이어지는 연결 문장) 순으로 읽힌다.
- * 연도는 확인된 정보가 없으므로 표시하지 않는다.
+ * 출발점 → 확장 과정 → 타임라인 → 강의 현장 → (PRESENT 로 이어지는 연결 문장) 순으로 읽힌다.
+ * 타임라인 연도는 ABOUT 경력에서 확인된 정보만 표시한다.
  */
 export function PastSection() {
   return (
@@ -25,6 +26,8 @@ export function PastSection() {
       <div className="mt-14 lg:mt-20">
         <PastTimeline />
       </div>
+
+      <FieldHighlights />
 
       <p className="border-brand text-navy mt-14 max-w-[44rem] border-l-2 py-1 pl-5 font-serif text-[clamp(1.0625rem,2.4vw,1.375rem)] leading-[1.65] break-keep lg:mt-20">
         {pastToPresent}

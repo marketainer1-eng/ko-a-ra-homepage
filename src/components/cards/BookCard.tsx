@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import type { Book } from "@/content/types";
@@ -18,16 +19,24 @@ export function BookCard({
         className,
       )}
     >
-      {/*
-        표지 이미지가 확정되면 이 영역에 next/image 를 넣는다.
-        (WebP/AVIF 대응은 next/image 가 자동 처리한다)
-      */}
-      <div
-        aria-hidden="true"
-        className="border-charcoal/20 bg-ivory flex aspect-3/4 w-full items-center justify-center border border-dashed"
-      >
-        <span className="label-caps text-charcoal/62">COVER</span>
-      </div>
+      {book.cover ? (
+        <div className="border-charcoal/12 bg-ivory relative aspect-3/4 w-full overflow-hidden border">
+          <Image
+            src={book.cover.src}
+            alt={book.cover.alt}
+            fill
+            sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw"
+            className="object-cover"
+          />
+        </div>
+      ) : (
+        <div
+          aria-hidden="true"
+          className="border-charcoal/20 bg-ivory flex aspect-3/4 w-full items-center justify-center border border-dashed"
+        >
+          <span className="label-caps text-charcoal/62">COVER</span>
+        </div>
+      )}
 
       <div className="flex flex-1 flex-col">
         <StatusBadge status={book.status} className="self-start" />
@@ -48,6 +57,12 @@ export function BookCard({
         ) : null}
 
         <dl className="text-charcoal/65 mt-4 flex flex-col gap-1 text-[0.8125rem]">
+          {book.authors.length > 0 ? (
+            <div className="flex gap-2">
+              <dt className="text-charcoal/65">저자</dt>
+              <dd>{book.authors.join(", ")}</dd>
+            </div>
+          ) : null}
           {book.publisher ? (
             <div className="flex gap-2">
               <dt className="text-charcoal/65">출판사</dt>

@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { ChannelCard } from "@/components/cards/ChannelCard";
 import { EntityItem } from "@/components/cards/EntityItem";
+import { FieldGallery } from "@/components/cards/FieldGallery";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ActionLink } from "@/components/ui/ActionLink";
 import { Container } from "@/components/ui/Container";
@@ -10,14 +13,21 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { person } from "@/config/person";
 import { siteConfig } from "@/config/site";
 import {
+  bookHistoryIntro,
+  careerHistory,
+  earlierBooks,
+  lectureHistory,
+} from "@/content/career";
+import { fieldIntro, fieldPhotos } from "@/content/field";
+import {
   currentEcosystem,
   expertiseAreas,
   organizationGroupOrder,
 } from "@/content/narrative";
-import { getMediaChannels } from "@/lib/content";
+import { getMediaChannels, getPublishedBooks } from "@/lib/content";
 import { breadcrumbSchema, jsonLdGraph, profilePageSchema } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/metadata";
-import { routes } from "@/lib/routes";
+import { bookPath, routes } from "@/lib/routes";
 
 const breadcrumbs = [
   { name: "HOME", path: routes.home },
@@ -29,7 +39,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     `AI 이커머스 전문가 ${siteConfig.nameKo}(${siteConfig.name})의 공식 프로필. ` +
     "명지대학교 테크노아트대학원 AI 이커머스학과 주임교수로서의 공식 직함, 전문영역, " +
-    "교육·산업·연구·미디어 기관과의 관계, 공식 외부 채널을 정리했습니다.",
+    "교육·산업·연구·미디어 연계기관, 공식 외부 채널을 정리했습니다.",
   path: routes.about,
   ogType: "profile",
 });
@@ -74,6 +84,15 @@ function FactList({ items }: { items: readonly string[] }) {
   );
 }
 
+/** 섹션 제목 아래 짧은 안내문 */
+function SectionLead({ children }: { children: ReactNode }) {
+  return (
+    <p className="text-charcoal/70 mt-5 max-w-[40rem] text-sm leading-[1.8] break-keep">
+      {children}
+    </p>
+  );
+}
+
 /**
  * ABOUT — 현재 공식적으로 누구이며 어떤 전문영역에서 활동하는가.
  *
@@ -83,6 +102,11 @@ function FactList({ items }: { items: readonly string[] }) {
  */
 export default function AboutPage() {
   const channels = getMediaChannels();
+  const { education } = person;
+  // 저서 이력: 상세 페이지가 있는 저서(출간일 역순, 미확정은 뒤로) → 이전 저서
+  const recentBooks = [...getPublishedBooks()].sort((a, b) =>
+    (b.publicationDate ?? "").localeCompare(a.publicationDate ?? ""),
+  );
   const organizationGroups = organizationGroupOrder
     .map((key) => currentEcosystem.find((group) => group.key === key))
     .filter((group) => group !== undefined);
@@ -93,7 +117,6 @@ export default function AboutPage() {
         eyebrow="ABOUT"
         title="ABOUT"
         titleKo={person.positioning}
-        lead="현재 공식적으로 누구이며, 어떤 전문영역에서 활동하는지를 정리한 기준 정보입니다."
         breadcrumbs={breadcrumbs}
       />
 
@@ -102,13 +125,24 @@ export default function AboutPage() {
           {/* 프로필 소개 */}
           <section aria-labelledby="about-intro">
             <SubHeading id="about-intro">소개</SubHeading>
-            <div className="mt-8 flex max-w-[46rem] flex-col gap-5">
-              <p className="text-navy font-serif text-[clamp(1.125rem,2.6vw,1.5rem)] leading-[1.7] font-medium break-keep">
-                {person.profile[0]}
-              </p>
-              <p className="text-charcoal/85 text-base leading-[1.95] break-keep sm:text-[1.0625rem]">
-                {person.profile[1]}
-              </p>
+            <div className="mt-8 grid gap-10 md:grid-cols-[minmax(0,17rem)_1fr] md:items-start lg:grid-cols-[minmax(0,20rem)_1fr] lg:gap-14">
+              <figure className="border-charcoal/12 relative aspect-[4/5] w-full max-w-xs overflow-hidden border bg-white md:max-w-none">
+                <Image
+                  src={person.photo.src}
+                  alt={person.photo.alt}
+                  fill
+                  sizes="(min-width: 1024px) 320px, (min-width: 768px) 272px, 320px"
+                  className="object-cover object-[50%_20%]"
+                />
+              </figure>
+              <div className="flex max-w-[46rem] flex-col gap-5">
+                <p className="text-navy font-serif text-[clamp(1.125rem,2.6vw,1.5rem)] leading-[1.7] font-medium break-keep">
+                  {person.profile[0]}
+                </p>
+                <p className="text-charcoal/85 text-base leading-[1.95] break-keep sm:text-[1.0625rem]">
+                  {person.profile[1]}
+                </p>
+              </div>
             </div>
           </section>
 
@@ -136,6 +170,18 @@ export default function AboutPage() {
                   {person.officialRole.lines[1]}
                 </address>
               </FactRow>
+              <FactRow term="Other Roles · 겸직">
+                <FactList items={person.otherRoles} />
+              </FactRow>
+              <FactRow term="Education · 학력">
+                {education.school} {education.major} {education.degree}
+                <span className="text-charcoal/60 ml-2 text-[0.875rem]">
+                  {education.graduated} 졸업
+                </span>
+              </FactRow>
+              <FactRow term="Experience · 경력">
+                {person.experienceSummary}
+              </FactRow>
               <FactRow term="Primary Expertise · 대표 전문분야">
                 {person.primaryExpertise}
                 <span className="text-charcoal/60 ml-2 text-[0.875rem]">
@@ -149,6 +195,37 @@ export default function AboutPage() {
                 <FactList items={person.currentAreas} />
               </FactRow>
             </dl>
+          </section>
+
+          {/* 경력 */}
+          <section aria-labelledby="about-career" className="mt-16 lg:mt-20">
+            <SubHeading id="about-career">경력</SubHeading>
+            <ol className="border-charcoal/12 bg-charcoal/12 mt-8 grid gap-px border">
+              {careerHistory.map((entry) => (
+                <li
+                  key={`${entry.organization}-${entry.period}`}
+                  className="grid gap-2 bg-white px-5 py-5 sm:grid-cols-[11rem_1fr_auto] sm:items-baseline sm:gap-6 sm:px-7"
+                >
+                  <span className="text-charcoal/65 text-sm tabular-nums">
+                    {entry.period}
+                  </span>
+                  <span className="text-navy font-serif text-base font-medium break-keep">
+                    {entry.organization}
+                    {entry.department ? (
+                      <span className="text-charcoal/70 ml-2 font-sans text-sm font-normal">
+                        {entry.department}
+                      </span>
+                    ) : null}
+                    <span className="text-brand ml-2 font-sans text-sm">
+                      {entry.role}
+                    </span>
+                  </span>
+                  <span className="text-charcoal/62 text-[0.8125rem] break-keep">
+                    {entry.field}
+                  </span>
+                </li>
+              ))}
+            </ol>
           </section>
 
           {/* 전문영역 */}
@@ -169,17 +246,84 @@ export default function AboutPage() {
             </ol>
           </section>
 
-          {/* 기관과의 관계 */}
+          {/* 강의 현장 */}
+          <section aria-labelledby="about-field" className="mt-16 lg:mt-20">
+            <SubHeading id="about-field">강의 현장</SubHeading>
+            <SectionLead>{fieldIntro}</SectionLead>
+            <FieldGallery photos={fieldPhotos} className="mt-8" />
+          </section>
+
+          {/* 주요 강의 이력 */}
+          <section aria-labelledby="about-lectures" className="mt-16 lg:mt-20">
+            <SubHeading id="about-lectures">주요 강의 이력</SubHeading>
+            <ul className="border-charcoal/12 bg-charcoal/12 mt-8 grid gap-px border sm:grid-cols-2">
+              {lectureHistory.map((lecture) => (
+                <li
+                  key={`${lecture.organization}-${lecture.period}`}
+                  className="flex flex-col gap-1 bg-white px-5 py-4 sm:px-6"
+                >
+                  <span className="text-charcoal/62 text-[0.8125rem] tabular-nums">
+                    {lecture.period}
+                  </span>
+                  <span className="text-navy font-serif text-[0.9375rem] font-medium break-keep">
+                    {lecture.organization}
+                  </span>
+                  <span className="text-charcoal/70 text-[0.8125rem] break-keep">
+                    {lecture.course}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {/* 저서 이력 */}
+          <section aria-labelledby="about-books" className="mt-16 lg:mt-20">
+            <SubHeading id="about-books">저서 이력</SubHeading>
+            <SectionLead>{bookHistoryIntro}</SectionLead>
+            <ol className="border-charcoal/12 bg-charcoal/12 mt-6 grid gap-px border">
+              {recentBooks.map((book) => (
+                <li
+                  key={book.title}
+                  className="grid grid-cols-[3.5rem_1fr] items-baseline gap-4 bg-white px-5 py-3.5 sm:px-7"
+                >
+                  <span className="text-charcoal/60 text-sm tabular-nums">
+                    {book.publicationDate?.slice(0, 4) ?? ""}
+                  </span>
+                  <Link
+                    href={bookPath(book.slug)}
+                    className="text-navy hover:text-brand font-serif text-[0.9375rem] break-keep underline-offset-4 hover:underline"
+                  >
+                    『{book.title}』
+                  </Link>
+                </li>
+              ))}
+              {earlierBooks.map((book) => (
+                <li
+                  key={book.title}
+                  className="grid grid-cols-[3.5rem_1fr] items-baseline gap-4 bg-white px-5 py-3.5 sm:px-7"
+                >
+                  <span className="text-charcoal/60 text-sm tabular-nums">
+                    {book.year}
+                  </span>
+                  <span className="text-navy font-serif text-[0.9375rem] break-keep">
+                    『{book.title}』
+                  </span>
+                </li>
+              ))}
+            </ol>
+            <div className="mt-6">
+              <ActionLink href={routes.books} variant="outline">
+                BOOKS
+              </ActionLink>
+            </div>
+          </section>
+
+          {/* 연계기관 */}
           <section
             aria-labelledby="about-organizations"
             className="mt-16 lg:mt-20"
           >
-            <SubHeading id="about-organizations">기관과의 관계</SubHeading>
-            <p className="text-charcoal/75 mt-6 max-w-[46rem] text-[0.975rem] leading-[1.85] break-keep">
-              아래 기관들은 각각 독립된 조직입니다. {siteConfig.name}와의 관계만
-              영역별로 정리했습니다.
-            </p>
-
+            <SubHeading id="about-organizations">연계기관</SubHeading>
             <dl className="border-charcoal/12 bg-charcoal/12 mt-8 grid gap-px border">
               {organizationGroups.map((group) => (
                 <div

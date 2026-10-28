@@ -43,12 +43,23 @@ export function getFeaturedStories(): Story[] {
 
 /* ------------------------------ BOOK ------------------------------ */
 
+/**
+ * 출간일 최신순 정렬. 출간일이 같으면 배열 순서를 유지하고,
+ * 출간일이 확인되지 않은(null) 도서는 맨 뒤에 둔다.
+ */
+function compareBooksByPublicationDate(a: Book, b: Book): number {
+  if (a.publicationDate === b.publicationDate) return 0;
+  if (a.publicationDate === null) return 1;
+  if (b.publicationDate === null) return -1;
+  return b.publicationDate.localeCompare(a.publicationDate);
+}
+
 export function getBooks(): Book[] {
-  return books;
+  return [...books].sort(compareBooksByPublicationDate);
 }
 
 export function getPublishedBooks(): Book[] {
-  return books.filter(isPublished);
+  return getBooks().filter(isPublished);
 }
 
 export function getBookBySlug(slug: string): Book | undefined {

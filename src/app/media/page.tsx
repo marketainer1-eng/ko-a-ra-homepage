@@ -112,8 +112,8 @@ export default function MediaPage() {
           </div>
 
           <DraftNote className="mt-14">
-            모든 채널의 공식 URL이 아직 확인되지 않아 링크가 비활성 상태입니다.
-            URL이 확정되면 verified 처리되어 자동으로 링크가 열립니다.
+            ‘링크 준비 중’으로 표시된 채널은 공식 URL이 확정되면 자동으로 링크가
+            열립니다.
           </DraftNote>
         </Container>
       </section>
