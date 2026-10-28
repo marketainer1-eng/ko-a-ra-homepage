@@ -9,16 +9,20 @@ import { cn } from "@/lib/cn";
 export function FieldGallery({
   photos,
   inverse = false,
+  columns = 4,
   className,
 }: {
   photos: readonly FieldPhoto[];
   inverse?: boolean;
+  /** 데스크톱(lg~) 열 수 */
+  columns?: 4 | 5;
   className?: string;
 }) {
   return (
     <ul
       className={cn(
-        "grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4",
+        "grid gap-x-6 gap-y-8 sm:grid-cols-2",
+        columns === 5 ? "lg:grid-cols-5" : "lg:grid-cols-4",
         className,
       )}
     >

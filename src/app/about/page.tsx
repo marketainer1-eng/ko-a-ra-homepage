@@ -242,7 +242,7 @@ export default function AboutPage() {
               지자체·여성인력개발센터의 창업 교육부터 대학원 강의, 산업 포럼까지
               AI 이커머스를 가르치고 나누는 현장입니다.
             </p>
-            <FieldGallery photos={fieldPhotos} className="mt-8" />
+            <FieldGallery photos={fieldPhotos} columns={5} className="mt-8" />
           </section>
 
           {/* 주요 강의 이력 */}
