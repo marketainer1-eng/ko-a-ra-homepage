@@ -11,6 +11,7 @@ import { DraftNote } from "@/components/ui/DraftNote";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { person } from "@/config/person";
 import { siteConfig } from "@/config/site";
+import { careerHistory, earlierBooks, lectureHistory } from "@/content/career";
 import { fieldPhotos } from "@/content/field";
 import {
   currentEcosystem,
@@ -149,6 +150,17 @@ export default function AboutPage() {
                   {person.officialRole.lines[1]}
                 </address>
               </FactRow>
+              <FactRow term="Other Roles · 겸직">
+                <FactList items={person.otherRoles} />
+              </FactRow>
+              <FactRow term="Education · 학력">
+                {person.education.school} {person.education.major}{" "}
+                {person.education.degree}
+                <span className="text-charcoal/60 ml-2 text-[0.875rem]">
+                  {person.education.graduated} 졸업
+                </span>
+              </FactRow>
+              <FactRow term="Experience · 경력">{person.experience}</FactRow>
               <FactRow term="Primary Expertise · 대표 전문분야">
                 {person.primaryExpertise}
                 <span className="text-charcoal/60 ml-2 text-[0.875rem]">
@@ -162,6 +174,37 @@ export default function AboutPage() {
                 <FactList items={person.currentAreas} />
               </FactRow>
             </dl>
+          </section>
+
+          {/* 경력 */}
+          <section aria-labelledby="about-career" className="mt-16 lg:mt-20">
+            <SubHeading id="about-career">경력</SubHeading>
+            <ol className="border-charcoal/12 bg-charcoal/12 mt-8 grid gap-px border">
+              {careerHistory.map((entry) => (
+                <li
+                  key={`${entry.organization}-${entry.period}`}
+                  className="grid gap-2 bg-white px-5 py-5 sm:grid-cols-[11rem_1fr_auto] sm:items-baseline sm:gap-6 sm:px-7"
+                >
+                  <span className="text-charcoal/65 text-sm tabular-nums">
+                    {entry.period}
+                  </span>
+                  <span className="text-navy font-serif text-base font-medium break-keep">
+                    {entry.organization}
+                    {entry.unit ? (
+                      <span className="text-charcoal/70 ml-2 font-sans text-sm font-normal">
+                        {entry.unit}
+                      </span>
+                    ) : null}
+                    <span className="text-brand ml-2 font-sans text-sm">
+                      {entry.title}
+                    </span>
+                  </span>
+                  <span className="text-charcoal/62 text-[0.8125rem] break-keep">
+                    {entry.field}
+                  </span>
+                </li>
+              ))}
+            </ol>
           </section>
 
           {/* 전문영역 */}
@@ -190,6 +233,57 @@ export default function AboutPage() {
               창업과 이커머스 실무를 강의해 온 현장입니다.
             </p>
             <FieldGallery photos={fieldPhotos} className="mt-8" />
+          </section>
+
+          {/* 주요 강의 이력 */}
+          <section aria-labelledby="about-lectures" className="mt-16 lg:mt-20">
+            <SubHeading id="about-lectures">주요 강의 이력</SubHeading>
+            <ul className="border-charcoal/12 bg-charcoal/12 mt-8 grid gap-px border sm:grid-cols-2">
+              {lectureHistory.map((lecture) => (
+                <li
+                  key={`${lecture.organization}-${lecture.period}`}
+                  className="flex flex-col gap-1 bg-white px-5 py-4 sm:px-6"
+                >
+                  <span className="text-charcoal/62 text-[0.8125rem] tabular-nums">
+                    {lecture.period}
+                  </span>
+                  <span className="text-navy font-serif text-[0.9375rem] font-medium break-keep">
+                    {lecture.organization}
+                  </span>
+                  <span className="text-charcoal/70 text-[0.8125rem] break-keep">
+                    {lecture.topic}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {/* 저서 이력 */}
+          <section aria-labelledby="about-books" className="mt-16 lg:mt-20">
+            <SubHeading id="about-books">저서 이력</SubHeading>
+            <p className="text-charcoal/70 mt-5 max-w-[40rem] text-sm leading-[1.8] break-keep">
+              2012년 첫 저서 이후 오픈마켓·소셜·카페·인스타그램·스마트스토어
+              마케팅을 거쳐 AI 이커머스로 저술 영역을 넓혀 왔습니다. 2025년 이후
+              저서는 BOOKS에서 볼 수 있습니다.
+            </p>
+            <ol className="mt-6 flex flex-wrap gap-2">
+              {earlierBooks.map((book) => (
+                <li
+                  key={book.title}
+                  className="border-charcoal/15 inline-flex min-h-9 items-center gap-2 border bg-white px-3 py-1.5 text-[0.875rem]"
+                >
+                  <span className="text-charcoal/60 tabular-nums">
+                    {book.year}
+                  </span>
+                  <span className="text-navy break-keep">『{book.title}』</span>
+                </li>
+              ))}
+            </ol>
+            <div className="mt-6">
+              <ActionLink href={routes.books} variant="outline">
+                BOOKS
+              </ActionLink>
+            </div>
           </section>
 
           {/* 연계기관 */}

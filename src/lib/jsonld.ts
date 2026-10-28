@@ -53,6 +53,10 @@ export function personSchema(): JsonLdObject {
     // 기관 관계 객체는 공식 URL/사실관계 확인 후 verified 처리되면 자동으로 포함된다.
     jobTitle: person.officialRole.full,
     knowsAbout: [...person.knowsAbout],
+    alumniOf: {
+      "@type": "CollegeOrUniversity",
+      name: person.education.school,
+    },
     url: absoluteUrl("/"),
     mainEntityOfPage: absoluteUrl("/about"),
     sameAs: person.sameAs,

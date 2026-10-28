@@ -77,6 +77,24 @@ export const person = {
     url: "https://aiecommerce.re.kr",
   } satisfies OfficialRole,
 
+  /** 학력 (Person JSON-LD 의 alumniOf 로도 출력) */
+  education: {
+    school: "국민대학교 대학원",
+    major: "창업학과",
+    degree: "석사",
+    graduated: "2024.02",
+  },
+
+  /** 현재 겸직 (ABOUT 화면 표시용) */
+  otherRoles: [
+    "한국쇼핑몰협회 협회장",
+    "AI 에이전트협회 협회장",
+    "주식회사 넥서스그룹 대표이사",
+  ],
+
+  /** 경력 요약 (2026년 기준) */
+  experience: "실무 22년차 · 강의 경력 17년",
+
   /** 전문성이 형성된 배경 (ABOUT 화면 표시용) */
   background: ["온라인 판매", "쇼핑몰 창업", "온라인 마케팅", "이커머스 교육"],
 
