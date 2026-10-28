@@ -229,8 +229,8 @@ export default function AboutPage() {
           <section aria-labelledby="about-field" className="mt-16 lg:mt-20">
             <SubHeading id="about-field">강의 현장</SubHeading>
             <p className="text-charcoal/70 mt-5 max-w-[40rem] text-sm leading-[1.8] break-keep">
-              대학 평생교육원, 기업·기관 교육, 창업 지원 프로그램에서 쇼핑몰
-              창업과 이커머스 실무를 강의해 온 현장입니다.
+              명지대학교 AI 이커머스학과 강의실과 산업 포럼 무대에서 AI
+              이커머스를 가르치고 나누는 현장입니다.
             </p>
             <FieldGallery photos={fieldPhotos} className="mt-8" />
           </section>
