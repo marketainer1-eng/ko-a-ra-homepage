@@ -239,10 +239,10 @@ export default function AboutPage() {
           <section aria-labelledby="about-field" className="mt-16 lg:mt-20">
             <SubHeading id="about-field">강의 현장</SubHeading>
             <p className="text-charcoal/70 mt-5 max-w-[40rem] text-sm leading-[1.8] break-keep">
-              지자체·여성인력개발센터의 창업 교육부터 대학원 강의, 산업 포럼까지
-              AI 이커머스를 가르치고 나누는 현장입니다.
+              지자체·여성인력개발센터의 창업 교육부터 대학원 강의, 산업 포럼
+              발표와 패널까지 AI 이커머스를 가르치고 나누는 현장입니다.
             </p>
-            <FieldGallery photos={fieldPhotos} columns={5} className="mt-8" />
+            <FieldGallery photos={fieldPhotos} columns={3} className="mt-8" />
           </section>
 
           {/* 주요 강의 이력 */}

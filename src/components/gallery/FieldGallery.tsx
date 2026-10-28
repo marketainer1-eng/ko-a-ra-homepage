@@ -15,14 +15,18 @@ export function FieldGallery({
   photos: readonly FieldPhoto[];
   inverse?: boolean;
   /** 데스크톱(lg~) 열 수 */
-  columns?: 4 | 5;
+  columns?: 3 | 4 | 5;
   className?: string;
 }) {
   return (
     <ul
       className={cn(
         "grid gap-x-6 gap-y-8 sm:grid-cols-2",
-        columns === 5 ? "lg:grid-cols-5" : "lg:grid-cols-4",
+        {
+          3: "lg:grid-cols-3",
+          4: "lg:grid-cols-4",
+          5: "lg:grid-cols-5",
+        }[columns],
         className,
       )}
     >
@@ -34,7 +38,7 @@ export function FieldGallery({
                 src={photo.src}
                 alt={photo.alt}
                 fill
-                sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw"
+                sizes={`(min-width: 1024px) ${Math.ceil(90 / columns)}vw, (min-width: 640px) 45vw, 90vw`}
                 className="object-cover"
               />
             </div>
