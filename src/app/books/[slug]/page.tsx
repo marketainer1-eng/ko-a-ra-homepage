@@ -146,10 +146,12 @@ export default async function BookDetailPage(
             </div>
           </div>
 
-          <DraftNote className="mt-14">
-            이 페이지는 도서 상세 템플릿 확인용 placeholder 입니다. 실제 도서
-            정보(제목, ISBN, 출간일 등)는 확인된 자료로만 등록합니다.
-          </DraftNote>
+          {book.status === "draft" ? (
+            <DraftNote className="mt-14">
+              이 도서는 draft 상태입니다. 실제 도서 정보(제목, ISBN, 출간일
+              등)는 확인된 자료로만 등록합니다.
+            </DraftNote>
+          ) : null}
 
           <div className="border-charcoal/12 mt-12 border-t pt-8">
             <ArrowLink href={routes.books}>ALL BOOKS</ArrowLink>
