@@ -21,7 +21,7 @@ export default function OpengraphImage() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        backgroundColor: "#081a33",
+        backgroundColor: "#171d59",
         padding: "80px",
       }}
     >
@@ -30,13 +30,14 @@ export default function OpengraphImage() {
           style={{
             width: "56px",
             height: "6px",
-            backgroundColor: "#1457d9",
+            backgroundImage:
+              "linear-gradient(90deg, #2cabd2 0%, #978ba8 50%, #e16f88 100%)",
             display: "flex",
           }}
         />
         <div
           style={{
-            color: "#eaf1ff",
+            color: "#e3f3f9",
             fontSize: "22px",
             letterSpacing: "0.32em",
             display: "flex",
@@ -60,7 +61,7 @@ export default function OpengraphImage() {
         </div>
         <div
           style={{
-            color: "#1457d9",
+            color: "#2cabd2",
             fontSize: "40px",
             fontWeight: 600,
             letterSpacing: "0.24em",
