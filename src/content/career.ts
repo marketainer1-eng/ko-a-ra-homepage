@@ -176,12 +176,12 @@ export const lectureHistory: LectureEntry[] = [
   },
 ];
 
-/** BOOKS 목록 이전의 저서 (출간 연도 순) */
+/** BOOKS 목록 이전의 저서 (최근 순) */
 export const earlierBooks: { title: string; year: string }[] = [
-  { title: "오픈마켓 광고 이기는 전략", year: "2012" },
-  { title: "소셜마케팅 이기는 전략", year: "2013" },
-  { title: "카페 마케팅 가이드", year: "2014" },
-  { title: "인스타그램 마케팅", year: "2017" },
-  { title: "스마트스토어 마케팅", year: "2018" },
   { title: "자영업 트렌드 2019", year: "2018" },
+  { title: "스마트스토어 마케팅", year: "2018" },
+  { title: "인스타그램 마케팅", year: "2017" },
+  { title: "카페 마케팅 가이드", year: "2014" },
+  { title: "소셜마케팅 이기는 전략", year: "2013" },
+  { title: "오픈마켓 광고 이기는 전략", year: "2012" },
 ];

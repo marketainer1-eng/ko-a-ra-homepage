@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { ChannelCard } from "@/components/cards/ChannelCard";
 import { EntityItem } from "@/components/cards/EntityItem";
@@ -18,10 +19,10 @@ import {
   expertiseAreas,
   organizationGroupOrder,
 } from "@/content/narrative";
-import { getMediaChannels } from "@/lib/content";
+import { getMediaChannels, getPublishedBooks } from "@/lib/content";
 import { breadcrumbSchema, jsonLdGraph, profilePageSchema } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/metadata";
-import { routes } from "@/lib/routes";
+import { bookPath, routes } from "@/lib/routes";
 
 const breadcrumbs = [
   { name: "HOME", path: routes.home },
@@ -87,6 +88,15 @@ function FactList({ items }: { items: readonly string[] }) {
  */
 export default function AboutPage() {
   const channels = getMediaChannels();
+  // 사이트 BOOKS(최신순) 뒤에 그 이전 저서를 이어 붙여 최근 → 과거로 읽히게 한다.
+  const bookTimeline = [
+    ...getPublishedBooks().map((book) => ({
+      title: book.title,
+      year: book.publicationDate?.slice(0, 4) ?? null,
+      href: bookPath(book.slug) as string | null,
+    })),
+    ...earlierBooks.map((book) => ({ ...book, href: null })),
+  ];
   const organizationGroups = organizationGroupOrder
     .map((key) => currentEcosystem.find((group) => group.key === key))
     .filter((group) => group !== undefined);
@@ -229,8 +239,8 @@ export default function AboutPage() {
           <section aria-labelledby="about-field" className="mt-16 lg:mt-20">
             <SubHeading id="about-field">강의 현장</SubHeading>
             <p className="text-charcoal/70 mt-5 max-w-[40rem] text-sm leading-[1.8] break-keep">
-              명지대학교 AI 이커머스학과 강의실과 산업 포럼 무대에서 AI
-              이커머스를 가르치고 나누는 현장입니다.
+              지자체·여성인력개발센터의 창업 교육부터 대학원 강의, 산업 포럼까지
+              AI 이커머스를 가르치고 나누는 현장입니다.
             </p>
             <FieldGallery photos={fieldPhotos} className="mt-8" />
           </section>
@@ -262,20 +272,31 @@ export default function AboutPage() {
           <section aria-labelledby="about-books" className="mt-16 lg:mt-20">
             <SubHeading id="about-books">저서 이력</SubHeading>
             <p className="text-charcoal/70 mt-5 max-w-[40rem] text-sm leading-[1.8] break-keep">
-              2012년 첫 저서 이후 오픈마켓·소셜·카페·인스타그램·스마트스토어
-              마케팅을 거쳐 AI 이커머스로 저술 영역을 넓혀 왔습니다. 2025년 이후
-              저서는 BOOKS에서 볼 수 있습니다.
+              최근 저서부터 2012년 첫 저서까지입니다. 오픈마켓·소셜·카페·
+              인스타그램·스마트스토어 마케팅을 거쳐 AI 이커머스로 저술 영역을
+              넓혀 왔습니다.
             </p>
-            <ol className="mt-6 flex flex-wrap gap-2">
-              {earlierBooks.map((book) => (
+            <ol className="border-charcoal/12 bg-charcoal/12 mt-6 grid gap-px border">
+              {bookTimeline.map((book) => (
                 <li
                   key={book.title}
-                  className="border-charcoal/15 inline-flex min-h-9 items-center gap-2 border bg-white px-3 py-1.5 text-[0.875rem]"
+                  className="grid grid-cols-[3.5rem_1fr] items-baseline gap-4 bg-white px-5 py-3.5 sm:px-7"
                 >
-                  <span className="text-charcoal/60 tabular-nums">
-                    {book.year}
+                  <span className="text-charcoal/60 text-sm tabular-nums">
+                    {book.year ?? ""}
                   </span>
-                  <span className="text-navy break-keep">『{book.title}』</span>
+                  {book.href ? (
+                    <Link
+                      href={book.href}
+                      className="text-navy hover:text-brand font-serif text-[0.9375rem] break-keep underline-offset-4 hover:underline"
+                    >
+                      『{book.title}』
+                    </Link>
+                  ) : (
+                    <span className="text-navy font-serif text-[0.9375rem] break-keep">
+                      『{book.title}』
+                    </span>
+                  )}
                 </li>
               ))}
             </ol>
