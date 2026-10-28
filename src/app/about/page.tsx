@@ -30,7 +30,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     `AI 이커머스 전문가 ${siteConfig.nameKo}(${siteConfig.name})의 공식 프로필. ` +
     "명지대학교 테크노아트대학원 AI 이커머스학과 주임교수로서의 공식 직함, 전문영역, " +
-    "교육·산업·연구·미디어 기관과의 관계, 공식 외부 채널을 정리했습니다.",
+    "교육·산업·연구·미디어 연계기관, 공식 외부 채널을 정리했습니다.",
   path: routes.about,
   ogType: "profile",
 });
@@ -180,17 +180,12 @@ export default function AboutPage() {
             </ol>
           </section>
 
-          {/* 기관과의 관계 */}
+          {/* 연계기관 */}
           <section
             aria-labelledby="about-organizations"
             className="mt-16 lg:mt-20"
           >
-            <SubHeading id="about-organizations">기관과의 관계</SubHeading>
-            <p className="text-charcoal/75 mt-6 max-w-[46rem] text-[0.975rem] leading-[1.85] break-keep">
-              아래 기관들은 각각 독립된 조직입니다. {siteConfig.name}와의 관계만
-              영역별로 정리했습니다.
-            </p>
-
+            <SubHeading id="about-organizations">연계기관</SubHeading>
             <dl className="border-charcoal/12 bg-charcoal/12 mt-8 grid gap-px border">
               {organizationGroups.map((group) => (
                 <div
