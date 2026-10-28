@@ -166,6 +166,8 @@ export const currentEcosystem: EcosystemGroup[] = [
       organization("AI 이커머스학과", {
         parent: "명지대학교 테크노아트대학원",
         relation: "주임교수",
+        url: "https://aiecommerce.re.kr",
+        verified: true,
       }),
     ],
   },
@@ -186,8 +188,16 @@ export const currentEcosystem: EcosystemGroup[] = [
     caption: "산업 · 협회",
     kind: "organization",
     entries: [
-      organization("한국쇼핑몰협회", { relation: "설립" }),
-      organization("AI 에이전트협회", { relation: "설립" }),
+      organization("한국쇼핑몰협회", {
+        relation: "설립",
+        url: "https://hkspmh.or.kr",
+        verified: true,
+      }),
+      organization("AI 에이전트협회", {
+        relation: "설립",
+        url: "https://aiagent.io.kr",
+        verified: true,
+      }),
       organization("한국버티컬AI협회", { relation: "설립" }),
       organization("크리에이터 커머스 협회", { relation: "설립" }),
     ],
@@ -204,7 +214,16 @@ export const currentEcosystem: EcosystemGroup[] = [
     label: "MEDIA",
     caption: "산업 미디어",
     kind: "organization",
-    entries: [organization("한국쇼핑몰신문"), organization("AI에이전트타임즈")],
+    entries: [
+      organization("한국쇼핑몰신문", {
+        url: "https://www.hkspmh.com/",
+        verified: true,
+      }),
+      organization("AI에이전트타임즈", {
+        url: "http://aiagentimes.hosting2003.co.kr/",
+        verified: true,
+      }),
+    ],
   },
   {
     key: "knowledge",

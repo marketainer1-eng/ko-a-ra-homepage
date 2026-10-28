@@ -2,7 +2,7 @@ import { ChannelCard } from "@/components/cards/ChannelCard";
 import { ArrowLink } from "@/components/ui/ActionLink";
 import { DraftNote } from "@/components/ui/DraftNote";
 import { Section, SectionHeader } from "@/components/ui/Section";
-import { getMediaChannels } from "@/lib/content";
+import { getMediaChannels, isLinkable } from "@/lib/content";
 import { routes } from "@/lib/routes";
 
 /**
@@ -16,10 +16,7 @@ export function MediaSection() {
 
   return (
     <Section id="media" tone="ivory">
-      <SectionHeader
-        eyebrow="MEDIA"
-        title="WRITING & MEDIA"
-      />
+      <SectionHeader eyebrow="MEDIA" title="WRITING & MEDIA" />
 
       <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {channels.map((channel) => (
@@ -29,9 +26,11 @@ export function MediaSection() {
         ))}
       </ul>
 
-      <DraftNote className="mt-12">
-        각 채널의 공식 URL이 확인되면 링크가 활성화됩니다.
-      </DraftNote>
+      {channels.some((channel) => !isLinkable(channel)) ? (
+        <DraftNote className="mt-12">
+          각 채널의 공식 URL이 확인되면 링크가 활성화됩니다.
+        </DraftNote>
+      ) : null}
 
       <div className="mt-8">
         <ArrowLink href={routes.media}>ALL CHANNELS</ArrowLink>

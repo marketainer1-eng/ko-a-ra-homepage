@@ -74,7 +74,7 @@ export const person = {
     title: "주임교수",
     full: "명지대학교 테크노아트대학원 AI 이커머스학과 주임교수",
     lines: ["명지대학교 테크노아트대학원", "AI 이커머스학과 주임교수"],
-    url: null,
+    url: "https://aiecommerce.re.kr",
   } satisfies OfficialRole,
 
   /** 전문성이 형성된 배경 (ABOUT 화면 표시용) */
@@ -112,10 +112,32 @@ export const person = {
    * 이 배열은 Schema 출력 전용이다. 공식 URL과 사실관계가 검증되어
    * verified: true 가 되기 전까지 JSON-LD 에 출력하지 않는다. (Phase 2-C에서 확정)
    */
-  sameAs: [] as string[],
+  sameAs: [
+    "https://www.youtube.com/@AI%EC%9D%B4%EC%BB%A4%EB%A8%B8%EC%8A%A4%EA%B5%90%EC%88%98",
+  ] as string[],
   affiliation: [] as EntityRelation[],
-  worksFor: [] as EntityRelation[],
-  founder: [] as EntityRelation[],
+  worksFor: [
+    {
+      name: "명지대학교 테크노아트대학원 AI 이커머스학과",
+      url: "https://aiecommerce.re.kr",
+      role: "주임교수",
+      verified: true,
+    },
+  ] as EntityRelation[],
+  founder: [
+    {
+      name: "한국쇼핑몰협회",
+      url: "https://hkspmh.or.kr",
+      role: "설립",
+      verified: true,
+    },
+    {
+      name: "AI 에이전트협회",
+      url: "https://aiagent.io.kr",
+      role: "설립",
+      verified: true,
+    },
+  ] as EntityRelation[],
   memberOf: [] as EntityRelation[],
 
   /** 연락 수단. 제공된 정보가 없으므로 비워 둔다. */
