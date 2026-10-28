@@ -41,6 +41,12 @@ export interface Book {
   /** ISO 8601 (YYYY-MM-DD). 확정 전에는 null */
   publicationDate: string | null;
   isbn: string | null;
+  /** 쪽수. 확인되지 않았으면 생략 또는 null */
+  pageCount?: number | null;
+  /** 무게(예: 961g). 확인되지 않았으면 생략 또는 null */
+  weight?: string | null;
+  /** 판형 크기(예: 150×220×40mm). 확인되지 않았으면 생략 또는 null */
+  dimensions?: string | null;
   /** 표지 이미지 경로. 없으면 null → placeholder 렌더링 */
   cover: { src: string; alt: string } | null;
   description: string | null;

@@ -40,6 +40,14 @@ export const person = {
   /** 이름을 뺀 포지셔닝 (ABOUT 기준정보용) */
   positioningLabel: "AI 이커머스 전문가",
 
+  /** 공식 프로필 사진 (public/profile/) */
+  photo: {
+    src: "/profile/ko-a-ra.jpg",
+    alt: `AI 이커머스 전문가 ${BRAND_NAME_KO} 프로필 사진`,
+    width: 1400,
+    height: 1550,
+  },
+
   /** 대표 전문분야 */
   primaryExpertise: "AI 이커머스",
 
@@ -68,6 +76,25 @@ export const person = {
     lines: ["명지대학교 테크노아트대학원", "AI 이커머스학과 주임교수"],
     url: null,
   } satisfies OfficialRole,
+
+  /** 겸직 (ABOUT 화면 표시용) */
+  otherRoles: [
+    "한국쇼핑몰협회 협회장",
+    "AI 에이전트협회 협회장",
+    "주식회사 넥서스그룹 대표이사",
+  ],
+
+  /** 학력 */
+  education: {
+    school: "국민대학교 대학원",
+    major: "창업학과",
+    degree: "석사",
+    /** 졸업 연월 (YYYY.MM) */
+    graduated: "2024.02",
+  },
+
+  /** 경력 요약 */
+  experienceSummary: "실무 22년차 · 강의 경력 17년",
 
   /** 전문성이 형성된 배경 (ABOUT 화면 표시용) */
   background: ["온라인 판매", "쇼핑몰 창업", "온라인 마케팅", "이커머스 교육"],

@@ -46,7 +46,7 @@ export function VerticalAiDiagram({
                     aria-hidden="true"
                     className={cn(
                       "pl-4 text-sm leading-none sm:pl-0 sm:leading-normal",
-                      inverse ? "text-brand-soft/50" : "text-brand/50",
+                      inverse ? "text-brand-bright/50" : "text-brand/50",
                     )}
                   >
                     <span className="sm:hidden">↓</span>

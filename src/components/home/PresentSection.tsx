@@ -20,7 +20,7 @@ export function PresentSection() {
         {expertiseAreas.map((area) => (
           <li
             key={area.no}
-            className="bg-navy flex flex-col gap-3 p-6 transition-colors hover:bg-[#0c2242] sm:gap-4 sm:p-8"
+            className="bg-navy flex flex-col gap-3 p-6 transition-colors hover:bg-[#1f2770] sm:gap-4 sm:p-8"
           >
             <p className="label-caps text-brand-soft">{area.no}</p>
             <h4 className="font-display text-sm leading-snug font-semibold tracking-[0.12em] text-white uppercase">
