@@ -59,6 +59,12 @@ export const mediaChannels: MediaChannel[] = [
     type: "video",
     url: "https://www.youtube.com/@AI%EC%9D%B4%EC%BB%A4%EB%A8%B8%EC%8A%A4%EA%B5%90%EC%88%98",
     verified: true,
+    preview: {
+      src: "/media-channels/youtube.jpg",
+      alt: "AI 이커머스학과 주임교수 고아라 YouTube 채널 화면",
+      width: 1074,
+      height: 840,
+    },
   },
   {
     key: "threads",
