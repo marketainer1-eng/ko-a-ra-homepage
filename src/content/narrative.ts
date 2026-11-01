@@ -219,7 +219,12 @@ export const currentEcosystem: EcosystemGroup[] = [
     label: "RESEARCH",
     caption: "연구",
     kind: "organization",
-    entries: [organization("AI 미디어 커머스 연구소")],
+    entries: [
+      organization("AI 미디어 커머스 연구소", {
+        url: "https://aiecommerce.re.kr/lab",
+        verified: true,
+      }),
+    ],
   },
   {
     key: "media",

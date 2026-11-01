@@ -31,6 +31,12 @@ export const mediaChannels: MediaChannel[] = [
     type: "news",
     url: "http://aiagentimes.hosting2003.co.kr/",
     verified: true,
+    preview: {
+      src: "/media-channels/aiagentimes.jpg",
+      alt: "AI에이전트타임즈 홈페이지 메인 화면",
+      width: 1161,
+      height: 889,
+    },
   },
   {
     key: "professor-column",
