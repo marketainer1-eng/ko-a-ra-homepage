@@ -45,6 +45,12 @@ export const mediaChannels: MediaChannel[] = [
     type: "column",
     url: "https://blog.naver.com/PostList.naver?blogId=hkspmh&from=postList&categoryNo=28",
     verified: true,
+    preview: {
+      src: "/media-channels/professor-column.jpg",
+      alt: "AI 이커머스학과 교수칼럼 블로그 글 목록 화면",
+      width: 936,
+      height: 830,
+    },
   },
   {
     key: "youtube",
