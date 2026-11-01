@@ -75,9 +75,9 @@ export const mediaChannels: MediaChannel[] = [
     verified: true,
     preview: {
       src: "/media-channels/threads.jpg",
-      alt: "Threads 로고",
-      width: 622,
-      height: 229,
+      alt: "명지대 AI 이커머스학과 주임교수 고아라 Threads 프로필 화면",
+      width: 863,
+      height: 844,
     },
   },
   {
@@ -87,6 +87,12 @@ export const mediaChannels: MediaChannel[] = [
     type: "social",
     url: "https://www.instagram.com/aiecommerce0419",
     verified: true,
+    preview: {
+      src: "/media-channels/instagram.jpg",
+      alt: "AI 이커머스학과 교수 고아라 Instagram 프로필 화면",
+      width: 1028,
+      height: 876,
+    },
   },
 ];
 
