@@ -216,7 +216,15 @@ export const books: Book[] = [
         label: "교보문고 eBook",
         url: "https://ebook-product.kyobobook.co.kr/dig/epd/sam/E000013571116",
       },
+      {
+        label: "AI 에이전트 협회 아카데미",
+        url: "https://startvibecoding.netlify.app",
+      },
     ],
+    coverLink: {
+      label: "AI 에이전트 협회 아카데미",
+      url: "https://startvibecoding.netlify.app",
+    },
     status: "published",
   },
   {
