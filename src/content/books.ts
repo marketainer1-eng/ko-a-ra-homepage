@@ -34,10 +34,14 @@ export const books: Book[] = [
         label: "교보문고",
         url: "https://product.kyobobook.co.kr/detail/S000221698428",
       },
+      {
+        label: "공식 사이트",
+        url: "https://aimct.netlify.app/",
+      },
     ],
     coverLink: {
-      label: "교보문고",
-      url: "https://product.kyobobook.co.kr/detail/S000221698428",
+      label: "공식 사이트",
+      url: "https://aimct.netlify.app/",
     },
     status: "published",
   },
@@ -115,7 +119,15 @@ export const books: Book[] = [
         label: "YES24",
         url: "https://www.yes24.com/Product/Goods/196216437",
       },
+      {
+        label: "공식 사이트",
+        url: "https://smallbzai.netlify.app/",
+      },
     ],
+    coverLink: {
+      label: "공식 사이트",
+      url: "https://smallbzai.netlify.app/",
+    },
     status: "published",
   },
   {
