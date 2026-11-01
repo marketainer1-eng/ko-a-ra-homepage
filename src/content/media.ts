@@ -67,6 +67,12 @@ export const mediaChannels: MediaChannel[] = [
     type: "social",
     url: "https://www.threads.com/@marketainer",
     verified: true,
+    preview: {
+      src: "/media-channels/threads.jpg",
+      alt: "Threads 로고",
+      width: 622,
+      height: 229,
+    },
   },
   {
     key: "instagram",
