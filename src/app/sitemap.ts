@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import {
-  getPublishedBooks,
+  getBooksWithDetailPage,
   getPublishedProjects,
   getPublishedStories,
 } from "@/lib/content";
@@ -61,14 +61,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }),
   );
 
-  const bookEntries: MetadataRoute.Sitemap = getPublishedBooks().map(
-    (book) => ({
+  const bookEntries: MetadataRoute.Sitemap = getBooksWithDetailPage()
+    .filter((book) => book.status === "published")
+    .map((book) => ({
       url: absoluteUrl(bookPath(book.slug)),
       lastModified: book.publicationDate ?? undefined,
       changeFrequency: "yearly",
       priority: 0.6,
-    }),
-  );
+    }));
 
   const projectEntries: MetadataRoute.Sitemap = getPublishedProjects().map(
     (project) => ({

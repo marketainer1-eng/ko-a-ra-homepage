@@ -38,7 +38,7 @@ export function Hero() {
             </h1>
 
             <p className="mt-9 max-w-[34rem] text-[0.975rem] leading-[1.9] break-keep text-white/75 sm:text-base">
-              {person.intro}
+              {person.heroLine}
             </p>
 
             <p className="border-accent mt-8 border-l-2 py-1 pl-5 text-sm leading-[1.7] break-keep text-white/90">

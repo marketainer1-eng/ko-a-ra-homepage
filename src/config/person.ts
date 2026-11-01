@@ -54,7 +54,10 @@ export const person = {
   /** 대표 전문분야 (영문 표기) */
   primaryExpertiseEn: "AI E-COMMERCE",
 
-  /** HERO 소개문 (Person JSON-LD description 에도 사용) */
+  /** HERO 한 줄 소개 */
+  heroLine: "쇼핑몰 창업에서 AI 검색·추천·쇼핑 에이전트까지",
+
+  /** 기본 소개문 (Person JSON-LD description 에 사용) */
   intro:
     "쇼핑몰 창업과 이커머스 현장에서 시작해 AI가 검색·추천·마케팅·판매와 비즈니스를 " +
     "어떻게 변화시키는지 연구하고 교육합니다.",

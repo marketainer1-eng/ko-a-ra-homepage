@@ -19,7 +19,7 @@ import {
   expertiseAreas,
   organizationGroupOrder,
 } from "@/content/narrative";
-import { getMediaChannels, getPublishedBooks } from "@/lib/content";
+import { getBooksWithDetailPage, getMediaChannels } from "@/lib/content";
 import { breadcrumbSchema, jsonLdGraph, profilePageSchema } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/metadata";
 import { bookPath, routes } from "@/lib/routes";
@@ -90,9 +90,11 @@ export default function AboutPage() {
   const channels = getMediaChannels();
   // 사이트 BOOKS(최신순) 뒤에 그 이전 저서를 이어 붙여 최근 → 과거로 읽히게 한다.
   const bookTimeline = [
-    ...getPublishedBooks().map((book) => ({
+    ...getBooksWithDetailPage().map((book) => ({
       title: book.title,
-      year: book.publicationDate?.slice(0, 4) ?? null,
+      year: book.upcoming
+        ? "예정"
+        : (book.publicationDate?.slice(0, 4) ?? null),
       href: bookPath(book.slug) as string | null,
     })),
     ...earlierBooks.map((book) => ({ ...book, href: null })),

@@ -38,7 +38,7 @@ export interface Book {
   subtitle: string | null;
   authors: string[];
   publisher: string | null;
-  /** ISO 8601 (YYYY-MM-DD). 확정 전에는 null */
+  /** ISO 8601 (YYYY-MM-DD, 연도만 아는 경우 YYYY). 확정 전에는 null */
   publicationDate: string | null;
   isbn: string | null;
   /** 쪽수. 확인 전에는 생략 */
@@ -51,6 +51,12 @@ export interface Book {
   category: string | null;
   externalLinks: ExternalLink[];
   status: ContentStatus;
+  /** 출간 예정 도서. 배지를 "출간예정"으로 표시한다 */
+  upcoming?: boolean;
+  /** false 면 목록 카드만 두고 상세 페이지를 만들지 않는다 (절판된 이전 저서 등) */
+  hasDetailPage?: boolean;
+  /** 출간일이 없는 책의 정렬 기준 (YYYY-MM) */
+  sortDate?: string;
 }
 
 /** 프로젝트 상세 서술 구조: WHY / PROBLEM / BUILD / RESULT / NEXT */
@@ -90,6 +96,8 @@ export interface MediaItem {
 
 /** 외부 채널(매체/SNS) 카드 */
 export interface MediaChannel {
+  /** 카드에 넣는 채널 화면 이미지 (public/media-channels/) */
+  preview?: { src: string; alt: string; width: number; height: number };
   key: string;
   /** 채널명 */
   name: string;

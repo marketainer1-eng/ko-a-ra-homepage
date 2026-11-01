@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { MediaChannel } from "@/content/types";
 import { isLinkable } from "@/lib/content";
 import { cn } from "@/lib/cn";
@@ -53,6 +54,17 @@ export function ChannelCard({
       >
         {channel.role}
       </p>
+
+      {channel.preview ? (
+        <Image
+          src={channel.preview.src}
+          alt={channel.preview.alt}
+          width={channel.preview.width}
+          height={channel.preview.height}
+          sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
+          className="border-charcoal/12 mt-5 block h-auto w-full border"
+        />
+      ) : null}
 
       {!linkable ? (
         <p

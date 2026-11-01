@@ -17,6 +17,12 @@ export const mediaChannels: MediaChannel[] = [
     type: "news",
     url: "https://www.hkspmh.com/",
     verified: true,
+    preview: {
+      src: "/media-channels/hkspmh.jpg",
+      alt: "한국쇼핑몰신문 홈페이지 메인 화면",
+      width: 1131,
+      height: 891,
+    },
   },
   {
     key: "ai-agent-times",

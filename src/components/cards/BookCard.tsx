@@ -39,15 +39,23 @@ export function BookCard({
       )}
 
       <div className="flex flex-1 flex-col">
-        <StatusBadge status={book.status} className="self-start" />
+        <StatusBadge
+          status={book.status}
+          upcoming={book.upcoming}
+          className="self-start"
+        />
 
         <h3 className="text-navy mt-4 font-serif text-lg leading-snug font-medium break-keep">
-          <Link
-            href={bookPath(book.slug)}
-            className="group-hover:text-brand transition-colors"
-          >
-            {book.title}
-          </Link>
+          {book.hasDetailPage === false ? (
+            book.title
+          ) : (
+            <Link
+              href={bookPath(book.slug)}
+              className="group-hover:text-brand transition-colors"
+            >
+              {book.title}
+            </Link>
+          )}
         </h3>
 
         {book.subtitle ? (

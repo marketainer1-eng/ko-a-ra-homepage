@@ -6,13 +6,13 @@ import { ArrowLink } from "@/components/ui/ActionLink";
 import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { StatusBadge } from "@/components/ui/StatusBadge";
-import { getBookBySlug, getBooks } from "@/lib/content";
+import { getBookBySlug, getBooksWithDetailPage } from "@/lib/content";
 import { bookSchema, breadcrumbSchema, jsonLdGraph } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/metadata";
 import { bookPath, routes } from "@/lib/routes";
 
 export function generateStaticParams() {
-  return getBooks().map((book) => ({ slug: book.slug }));
+  return getBooksWithDetailPage().map((book) => ({ slug: book.slug }));
 }
 
 export async function generateMetadata(
@@ -78,7 +78,9 @@ export default async function BookDetailPage(
         titleKo={book.subtitle ?? undefined}
         titleFont="serif"
         breadcrumbs={breadcrumbs}
-        meta={<StatusBadge status={book.status} inverse />}
+        meta={
+          <StatusBadge status={book.status} upcoming={book.upcoming} inverse />
+        }
       />
 
       <article className="bg-ivory py-20 sm:py-24 lg:py-28">
