@@ -51,6 +51,8 @@ export interface Book {
   category: string | null;
   externalLinks: ExternalLink[];
   status: ContentStatus;
+  /** 표지를 누르면 열리는 판매 페이지 */
+  coverLink?: { label: string; url: string };
   /** 출간 예정 도서. 배지를 "출간예정"으로 표시한다 */
   upcoming?: boolean;
   /** false 면 목록 카드만 두고 상세 페이지를 만들지 않는다 (절판된 이전 저서 등) */

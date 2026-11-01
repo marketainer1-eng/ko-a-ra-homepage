@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { BookCover } from "@/components/cards/BookCover";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ArrowLink } from "@/components/ui/ActionLink";
 import { Container } from "@/components/ui/Container";
@@ -87,16 +88,18 @@ export default async function BookDetailPage(
         <Container>
           <div className="grid gap-12 lg:grid-cols-[0.6fr_1fr] lg:gap-16">
             {book.cover ? (
-              <div className="border-charcoal/12 relative aspect-3/4 w-full max-w-xs overflow-hidden border bg-white">
-                <Image
-                  src={book.cover.src}
-                  alt={book.cover.alt}
-                  fill
-                  priority
-                  sizes="320px"
-                  className="object-cover"
-                />
-              </div>
+              <BookCover book={book}>
+                <div className="border-charcoal/12 relative aspect-3/4 w-full max-w-xs overflow-hidden border bg-white">
+                  <Image
+                    src={book.cover.src}
+                    alt={book.cover.alt}
+                    fill
+                    priority
+                    sizes="320px"
+                    className="object-cover"
+                  />
+                </div>
+              </BookCover>
             ) : (
               <div
                 aria-hidden="true"

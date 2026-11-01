@@ -30,7 +30,15 @@ export const books: Book[] = [
         label: "YES24",
         url: "https://www.yes24.com/Product/Goods/198929807",
       },
+      {
+        label: "교보문고",
+        url: "https://product.kyobobook.co.kr/detail/S000221698428",
+      },
     ],
+    coverLink: {
+      label: "교보문고",
+      url: "https://product.kyobobook.co.kr/detail/S000221698428",
+    },
     status: "published",
   },
   {
@@ -53,7 +61,15 @@ export const books: Book[] = [
         label: "YES24",
         url: "https://www.yes24.com/Product/Goods/195080837",
       },
+      {
+        label: "교보문고",
+        url: "https://product.kyobobook.co.kr/detail/S000220846017",
+      },
     ],
+    coverLink: {
+      label: "교보문고",
+      url: "https://product.kyobobook.co.kr/detail/S000220846017",
+    },
     status: "published",
   },
   {
@@ -169,7 +185,15 @@ export const books: Book[] = [
         label: "교보문고 eBook",
         url: "https://ebook-product.kyobobook.co.kr/dig/epd/sam/E000013692295",
       },
+      {
+        label: "AI 이커머스 아카데미",
+        url: "https://hkspmh.liveklass.com/classes/319604",
+      },
     ],
+    coverLink: {
+      label: "AI 이커머스 아카데미",
+      url: "https://hkspmh.liveklass.com/classes/319604",
+    },
     status: "published",
   },
   {

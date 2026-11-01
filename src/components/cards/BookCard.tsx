@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BookCover } from "@/components/cards/BookCover";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import type { Book } from "@/content/types";
 import { bookPath } from "@/lib/routes";
@@ -20,15 +21,17 @@ export function BookCard({
       )}
     >
       {book.cover ? (
-        <div className="border-charcoal/12 bg-ivory relative aspect-3/4 w-full overflow-hidden border">
-          <Image
-            src={book.cover.src}
-            alt={book.cover.alt}
-            fill
-            sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw"
-            className="object-cover"
-          />
-        </div>
+        <BookCover book={book}>
+          <div className="border-charcoal/12 bg-ivory relative aspect-3/4 w-full overflow-hidden border">
+            <Image
+              src={book.cover.src}
+              alt={book.cover.alt}
+              fill
+              sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw"
+              className="object-cover"
+            />
+          </div>
+        </BookCover>
       ) : (
         <div
           aria-hidden="true"
