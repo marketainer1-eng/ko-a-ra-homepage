@@ -191,6 +191,8 @@ export const currentEcosystem: EcosystemGroup[] = [
     entries: [
       organization("AI 이커머스 아카데미", {
         description: "AI 이커머스 실무 및 전문가 교육",
+        url: "https://hkspmh.liveklass.com",
+        verified: true,
       }),
     ],
   },
@@ -238,6 +240,10 @@ export const currentEcosystem: EcosystemGroup[] = [
       }),
       organization("AI에이전트타임즈", {
         url: "http://aiagentimes.hosting2003.co.kr/",
+        verified: true,
+      }),
+      organization("자기분야", {
+        url: "http://jagibunya.news",
         verified: true,
       }),
     ],
