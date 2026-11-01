@@ -79,8 +79,8 @@ export const mediaChannels: MediaChannel[] = [
     name: "Instagram",
     role: "사람 · 현장 · 프로젝트 과정",
     type: "social",
-    url: null,
-    verified: false,
+    url: "https://www.instagram.com/aiecommerce0419",
+    verified: true,
   },
 ];
 

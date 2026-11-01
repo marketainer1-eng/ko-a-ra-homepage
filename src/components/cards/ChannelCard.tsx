@@ -36,7 +36,10 @@ export function ChannelCard({
           className={cn(
             "text-sm transition-transform",
             linkable
-              ? "text-brand group-hover:translate-x-0.5"
+              ? cn(
+                  "group-hover:translate-x-0.5",
+                  inverse ? "text-brand-bright" : "text-brand",
+                )
               : inverse
                 ? "text-white/55"
                 : "text-charcoal/45",
@@ -66,7 +69,22 @@ export function ChannelCard({
         />
       ) : null}
 
-      {!linkable ? (
+      {linkable ? (
+        <p
+          className={cn(
+            "font-display mt-auto pt-5 text-[0.7rem] font-semibold tracking-[0.18em]",
+            inverse ? "text-brand-bright" : "text-brand",
+          )}
+        >
+          바로가기
+          <span
+            aria-hidden="true"
+            className="ml-1.5 inline-block transition-transform group-hover:translate-x-1"
+          >
+            →
+          </span>
+        </p>
+      ) : (
         <p
           className={cn(
             "label-caps mt-5",
@@ -75,7 +93,7 @@ export function ChannelCard({
         >
           링크 준비 중
         </p>
-      ) : null}
+      )}
     </>
   );
 

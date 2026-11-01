@@ -17,9 +17,16 @@ export function BookCover({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`『${book.title}』 ${book.coverLink.label}에서 보기`}
-      className="block transition-opacity hover:opacity-90"
+      className="group/cover relative block w-full max-w-xs"
     >
       {children}
+      <span
+        aria-hidden="true"
+        className="bg-navy/90 group-hover/cover:bg-brand absolute right-2 bottom-2 inline-flex items-center gap-1 px-2.5 py-1.5 text-[0.75rem] font-medium text-white transition-colors"
+      >
+        {book.coverLink.label}
+        <span>↗</span>
+      </span>
     </a>
   );
 }

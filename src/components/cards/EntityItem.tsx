@@ -15,11 +15,8 @@ export function EntityItem({
   entry: EcosystemEntry;
   className?: string;
 }) {
-  const name = (
-    <span className="text-navy font-serif text-base leading-snug font-medium break-keep sm:text-[1.0625rem]">
-      {entry.name}
-    </span>
-  );
+  const nameClass =
+    "font-serif text-base leading-snug font-medium break-keep sm:text-[1.0625rem]";
 
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
@@ -35,12 +32,21 @@ export function EntityItem({
             href={entry.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-brand underline-offset-4 hover:underline"
+            className={cn(
+              nameClass,
+              "group text-brand decoration-brand/40 hover:decoration-brand inline-flex items-center gap-1.5 underline underline-offset-4",
+            )}
           >
-            {name}
+            {entry.name}
+            <span
+              aria-hidden="true"
+              className="text-sm transition-transform group-hover:translate-x-0.5"
+            >
+              ↗
+            </span>
           </a>
         ) : (
-          name
+          <span className={cn(nameClass, "text-navy")}>{entry.name}</span>
         )}
 
         {entry.relation ? (

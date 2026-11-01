@@ -290,7 +290,7 @@ export default function AboutPage() {
                   {book.href ? (
                     <Link
                       href={book.href}
-                      className="text-navy hover:text-brand font-serif text-[0.9375rem] break-keep underline-offset-4 hover:underline"
+                      className="text-brand decoration-brand/40 hover:decoration-brand font-serif text-[0.9375rem] break-keep underline underline-offset-4"
                     >
                       『{book.title}』
                     </Link>

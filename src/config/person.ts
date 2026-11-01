@@ -136,6 +136,7 @@ export const person = {
   sameAs: [
     "https://www.youtube.com/@AI%EC%9D%B4%EC%BB%A4%EB%A8%B8%EC%8A%A4%EA%B5%90%EC%88%98",
     "https://www.threads.com/@marketainer",
+    "https://www.instagram.com/aiecommerce0419",
   ] as string[],
   affiliation: [] as EntityRelation[],
   worksFor: [
