@@ -65,8 +65,8 @@ export const mediaChannels: MediaChannel[] = [
     name: "Threads",
     role: "짧지만 밀도 있는 생각과 관점",
     type: "social",
-    url: null,
-    verified: false,
+    url: "https://www.threads.com/@marketainer",
+    verified: true,
   },
   {
     key: "instagram",
