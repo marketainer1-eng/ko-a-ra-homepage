@@ -1,17 +1,13 @@
-import { LatestVideosList } from "@/components/home/LatestVideosList";
+import { FeaturedVideos } from "@/components/home/FeaturedVideos";
 import { ActionLink } from "@/components/ui/ActionLink";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { getMediaChannels, isLinkable } from "@/lib/content";
-import { fetchLatestVideos, type YoutubeVideo } from "@/lib/youtube";
 
 /**
  * LATEST VIDEOS.
- * YouTube 채널의 최근 영상 5개(쇼츠 포함). 빌드가 피드를 못 읽어도 멈추지 않는다.
+ * content/media.ts 의 대표 영상을 사이트 안에서 바로 재생한다.
  */
-export async function LatestVideosSection() {
-  const initial = await fetchLatestVideos({ cache: "force-cache" }).catch(
-    (): YoutubeVideo[] => [],
-  );
+export function LatestVideosSection() {
   const channel = getMediaChannels().find(({ key }) => key === "youtube");
 
   return (
@@ -22,7 +18,7 @@ export async function LatestVideosSection() {
         lead="AI 이커머스 현장의 변화를 영상으로 풀어 드립니다."
       />
 
-      <LatestVideosList initial={initial} />
+      <FeaturedVideos />
 
       {channel && isLinkable(channel) ? (
         <div className="mt-10">

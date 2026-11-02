@@ -98,9 +98,33 @@ export const mediaChannels: MediaChannel[] = [
 
 /**
  * HOME 하단 FOLLOW 섹션에 노출할 SNS 채널.
- * 실시간 API 연동 없이 링크 카드로만 구성한다.
+ * 최신 게시글은 netlify/functions/latest-posts.mts 가 공급한다.
  */
 export const followChannelKeys = ["threads", "instagram", "youtube"] as const;
+
+/** LATEST VIDEOS 맨 위에서 사이트 안에서 바로 재생하는 영상 */
+export const featuredVideos: {
+  id: string;
+  title: string;
+  /** 세로 쇼츠 */
+  vertical: boolean;
+}[] = [
+  {
+    id: "V5ZDnywbbmw",
+    title: "검색은 찾아주고 에이전트는 골라준다 | 네이버 쇼핑 AI 에이전트 #02",
+    vertical: true,
+  },
+  {
+    id: "6_V8w4_Ba8Q",
+    title: "로봇이 아니라 데이터로 보는 피지컬 AI — 고아라 교수",
+    vertical: false,
+  },
+  {
+    id: "GVgEugXfcRE",
+    title: "네이버 vs 쿠팡, AI 쇼핑은 무엇이 다를까? 판매자가 준비할 것",
+    vertical: false,
+  },
+];
 
 /**
  * 개별 미디어 콘텐츠(칼럼·영상·인터뷰 등).
