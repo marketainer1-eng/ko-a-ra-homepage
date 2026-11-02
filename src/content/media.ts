@@ -6,9 +6,8 @@ import type { MediaChannel, MediaItem } from "@/content/types";
  * 개인 홈페이지에 외부 콘텐츠 전문을 복제하지 않는다.
  * 외부 채널로 연결하는 링크 카드만 관리한다.
  *
- * 공식 URL이 제공되지 않았으므로 url 은 모두 null 이며(가짜 URL 금지),
+ * 공식 URL이 확인된 채널만 url 을 채우고 verified: true 로 둔다(가짜 URL 금지).
  * verified: false 인 채널은 화면에서 "링크 준비 중" 상태로 표시된다.
- * Phase 2에서 공식 URL을 채우고 verified: true 로 바꾸면 자동으로 링크가 활성화된다.
  */
 export const mediaChannels: MediaChannel[] = [
   {
@@ -16,56 +15,116 @@ export const mediaChannels: MediaChannel[] = [
     name: "한국쇼핑몰신문",
     role: "쇼핑몰 창업 · 이커머스 · 온라인 유통",
     type: "news",
-    url: null,
-    verified: false,
+    url: "https://www.hkspmh.com/",
+    verified: true,
+    preview: {
+      src: "/media-channels/hkspmh.jpg",
+      alt: "한국쇼핑몰신문 홈페이지 메인 화면",
+      width: 1131,
+      height: 891,
+    },
   },
   {
     key: "ai-agent-times",
     name: "AI에이전트타임즈",
     role: "AI Agent · AI Search · GEO · Agentic Commerce",
     type: "news",
-    url: null,
-    verified: false,
+    url: "http://aiagentimes.hosting2003.co.kr/",
+    verified: true,
+    preview: {
+      src: "/media-channels/aiagentimes.jpg",
+      alt: "AI에이전트타임즈 홈페이지 메인 화면",
+      width: 1161,
+      height: 889,
+    },
   },
   {
     key: "professor-column",
     name: "AI 이커머스학과 교수칼럼",
     role: "AI 이커머스 교육 · 산업 관점",
     type: "column",
-    url: null,
-    verified: false,
+    url: "https://blog.naver.com/PostList.naver?blogId=hkspmh&from=postList&categoryNo=28",
+    verified: true,
+    preview: {
+      src: "/media-channels/professor-column.jpg",
+      alt: "AI 이커머스학과 교수칼럼 블로그 글 목록 화면",
+      width: 936,
+      height: 830,
+    },
   },
   {
     key: "youtube",
     name: "YouTube",
     role: "설명과 이야기",
     type: "video",
-    url: null,
-    verified: false,
+    url: "https://www.youtube.com/@AI%EC%9D%B4%EC%BB%A4%EB%A8%B8%EC%8A%A4%EA%B5%90%EC%88%98",
+    verified: true,
+    preview: {
+      src: "/media-channels/youtube.jpg",
+      alt: "AI 이커머스학과 주임교수 고아라 YouTube 채널 화면",
+      width: 1074,
+      height: 840,
+    },
   },
   {
     key: "threads",
     name: "Threads",
     role: "짧지만 밀도 있는 생각과 관점",
     type: "social",
-    url: null,
-    verified: false,
+    url: "https://www.threads.com/@marketainer",
+    verified: true,
+    preview: {
+      src: "/media-channels/threads.jpg",
+      alt: "명지대 AI 이커머스학과 주임교수 고아라 Threads 프로필 화면",
+      width: 863,
+      height: 844,
+    },
   },
   {
     key: "instagram",
     name: "Instagram",
     role: "사람 · 현장 · 프로젝트 과정",
     type: "social",
-    url: null,
-    verified: false,
+    url: "https://www.instagram.com/aiecommerce0419",
+    verified: true,
+    preview: {
+      src: "/media-channels/instagram.jpg",
+      alt: "AI 이커머스학과 교수 고아라 Instagram 프로필 화면",
+      width: 1028,
+      height: 876,
+    },
   },
 ];
 
 /**
  * HOME 하단 FOLLOW 섹션에 노출할 SNS 채널.
- * 실시간 API 연동 없이 링크 카드로만 구성한다.
+ * 최신 게시글은 netlify/functions/latest-posts.mts 가 공급한다.
  */
 export const followChannelKeys = ["threads", "instagram", "youtube"] as const;
+
+/** LATEST VIDEOS 맨 위에서 사이트 안에서 바로 재생하는 영상 */
+export const featuredVideos: {
+  id: string;
+  title: string;
+  /** 세로 쇼츠 */
+  vertical: boolean;
+}[] = [
+  {
+    id: "V5ZDnywbbmw",
+    title: "검색은 찾아주고 에이전트는 골라준다 | 네이버 쇼핑 AI 에이전트 #02",
+    vertical: true,
+  },
+  {
+    id: "6_V8w4_Ba8Q",
+    title: "로봇이 아니라 데이터로 보는 피지컬 AI — 고아라 교수",
+    vertical: false,
+  },
+  {
+    id: "GVgEugXfcRE",
+    title: "네이버 vs 쿠팡, AI 쇼핑은 무엇이 다를까? 판매자가 준비할 것",
+    vertical: false,
+  },
+];
 
 /**
  * 개별 미디어 콘텐츠(칼럼·영상·인터뷰 등).

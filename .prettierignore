@@ -5,3 +5,9 @@ build
 coverage
 package-lock.json
 next-env.d.ts
+
+.netlify
+
+# 네이버·구글 소유확인 파일 (내용 변경 금지)
+public/naver*.html
+public/google*.html

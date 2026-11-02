@@ -52,7 +52,7 @@ export function PageHeader({
             className={
               titleFont === "serif"
                 ? "font-serif text-[clamp(1.5rem,4.6vw,2.75rem)] leading-[1.35] font-medium break-keep"
-                : "font-display text-[clamp(2rem,7vw,4.25rem)] leading-[1.02] font-semibold tracking-[0.02em] uppercase"
+                : "font-display text-cover-gradient w-fit text-[clamp(2rem,7vw,4.25rem)] leading-[1.02] font-semibold tracking-[0.02em] uppercase"
             }
           >
             {title}

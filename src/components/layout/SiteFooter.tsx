@@ -50,9 +50,15 @@ export function SiteFooter() {
                       href={channel.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex min-h-9 items-center text-sm text-white/70 transition-colors hover:text-white"
+                      className="group decoration-brand-bright/50 hover:decoration-brand-bright inline-flex min-h-9 items-center gap-1.5 text-sm text-white underline underline-offset-4 transition-colors"
                     >
                       {channel.name}
+                      <span
+                        aria-hidden="true"
+                        className="text-brand-bright transition-transform group-hover:translate-x-0.5"
+                      >
+                        ↗
+                      </span>
                     </a>
                   ) : (
                     <span className="inline-flex min-h-9 items-center text-sm text-white/60">

@@ -78,6 +78,8 @@ export function SectionHeader({
         className,
       )}
     >
+      <span aria-hidden="true" className="bg-cover-gradient block h-0.5 w-12" />
+
       {eyebrow ? (
         <p
           className={cn(

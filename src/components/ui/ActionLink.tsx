@@ -9,15 +9,15 @@ const base =
   "font-display text-[0.7rem] font-semibold tracking-[0.18em] uppercase transition-colors";
 
 const variantClass: Record<Variant, string> = {
-  primary: "bg-brand text-white hover:bg-[#0f47b4]",
+  primary: "bg-brand text-white hover:bg-navy",
   outline:
     "border border-charcoal/25 text-navy hover:border-brand hover:text-brand",
-  quiet: "text-brand hover:text-[#0f47b4]",
+  quiet: "text-brand hover:text-navy",
 };
 
 const inverseVariantClass: Record<Variant, string> = {
-  primary: "bg-brand text-white hover:bg-[#2f6ce4]",
-  outline: "border border-white/30 text-white hover:border-brand-soft",
+  primary: "bg-brand text-white hover:bg-white hover:text-navy",
+  outline: "border border-white/30 text-white hover:border-brand-bright",
   quiet: "text-brand-soft hover:text-white",
 };
 

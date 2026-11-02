@@ -5,6 +5,7 @@ import { FeaturedStorySection } from "@/components/home/FeaturedStorySection";
 import { FollowSection } from "@/components/home/FollowSection";
 import { FutureSection } from "@/components/home/FutureSection";
 import { Hero } from "@/components/home/Hero";
+import { LatestVideosSection } from "@/components/home/LatestVideosSection";
 import { MediaSection } from "@/components/home/MediaSection";
 import { PastSection } from "@/components/home/PastSection";
 import { PresentSection } from "@/components/home/PresentSection";
@@ -21,9 +22,10 @@ import { ProjectsSection } from "@/components/home/ProjectsSection";
  * 06 FEATURED STORY
  * 07 BOOKS & PUBLICATIONS
  * 08 PROJECTS
- * 09 WRITING & MEDIA
- * 10 FOLLOW KO A RA
- * 11 ABOUT / CONTACT CTA
+ * 09 LATEST VIDEOS
+ * 10 WRITING & MEDIA
+ * 11 FOLLOW KO A RA
+ * 12 ABOUT / CONTACT CTA
  *
  * 한 번 스크롤하면 PAST → PRESENT → FUTURE 가 자연스럽게 읽히도록 구성한다.
  * metadata 는 app/layout.tsx 의 기본값(= HOME title/description)을 사용한다.
@@ -39,6 +41,7 @@ export default function Home() {
       <FeaturedStorySection />
       <BooksSection />
       <ProjectsSection />
+      <LatestVideosSection />
       <MediaSection />
       <FollowSection />
       <AboutCtaSection />

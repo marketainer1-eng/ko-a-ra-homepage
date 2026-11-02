@@ -62,7 +62,7 @@ export function EcosystemSection() {
       </dl>
 
       <div className="mt-8">
-        <ArrowLink href={routes.about}>ABOUT · 기관과의 관계</ArrowLink>
+        <ArrowLink href={routes.about}>ABOUT · 연계기관</ArrowLink>
       </div>
     </Section>
   );

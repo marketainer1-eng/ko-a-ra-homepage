@@ -43,16 +43,28 @@ export function getFeaturedStories(): Story[] {
 
 /* ------------------------------ BOOK ------------------------------ */
 
+/** 출간일 최신순. 출간일이 없는 책은 sortDate 위치에 둔다. */
+function byNewestBook(a: Book, b: Book): number {
+  const dateA = a.publicationDate ?? a.sortDate ?? "";
+  const dateB = b.publicationDate ?? b.sortDate ?? "";
+  return dateB.localeCompare(dateA);
+}
+
 export function getBooks(): Book[] {
-  return books;
+  return [...books].sort(byNewestBook);
 }
 
 export function getPublishedBooks(): Book[] {
-  return books.filter(isPublished);
+  return getBooks().filter(isPublished);
+}
+
+/** 상세 페이지가 있는 책 (카드만 있는 이전 저서 제외) */
+export function getBooksWithDetailPage(): Book[] {
+  return getBooks().filter((book) => book.hasDetailPage !== false);
 }
 
 export function getBookBySlug(slug: string): Book | undefined {
-  return books.find((book) => book.slug === slug);
+  return getBooksWithDetailPage().find((book) => book.slug === slug);
 }
 
 /* ---------------------------- PROJECT ----------------------------- */

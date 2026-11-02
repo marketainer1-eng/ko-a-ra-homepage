@@ -1,6 +1,13 @@
+import Image from "next/image";
 import type { MediaChannel } from "@/content/types";
+import type { LatestPost } from "@/lib/latest-posts";
 import { isLinkable } from "@/lib/content";
 import { cn } from "@/lib/cn";
+
+const postDate = new Intl.DateTimeFormat("ko-KR", {
+  dateStyle: "medium",
+  timeZone: "Asia/Seoul",
+});
 
 /**
  * 외부 채널 링크 카드.
@@ -10,10 +17,13 @@ import { cn } from "@/lib/cn";
  */
 export function ChannelCard({
   channel,
+  post,
   inverse = false,
   className,
 }: {
   channel: MediaChannel;
+  /** 있으면 프로필 이미지 대신 최신 게시글을 보여주고 그 글로 연결한다 */
+  post?: LatestPost;
   inverse?: boolean;
   className?: string;
 }) {
@@ -35,7 +45,10 @@ export function ChannelCard({
           className={cn(
             "text-sm transition-transform",
             linkable
-              ? "text-brand group-hover:translate-x-0.5"
+              ? cn(
+                  "group-hover:translate-x-0.5",
+                  inverse ? "text-brand-bright" : "text-brand",
+                )
               : inverse
                 ? "text-white/55"
                 : "text-charcoal/45",
@@ -54,7 +67,68 @@ export function ChannelCard({
         {channel.role}
       </p>
 
-      {!linkable ? (
+      {post ? (
+        <div className="mt-5 flex flex-col gap-3">
+          {post.image ? (
+            <div className="bg-charcoal/20 relative aspect-[4/3] overflow-hidden">
+              <Image
+                src={post.image}
+                alt=""
+                fill
+                unoptimized
+                referrerPolicy="no-referrer"
+                sizes="(min-width: 640px) 30vw, 90vw"
+                className="object-cover"
+              />
+            </div>
+          ) : null}
+          {post.text ? (
+            <p
+              className={cn(
+                "line-clamp-3 font-serif text-[0.9375rem] leading-snug break-keep",
+                inverse ? "text-white" : "text-navy",
+              )}
+            >
+              {post.text}
+            </p>
+          ) : null}
+          <time
+            dateTime={post.publishedAt}
+            className={cn(
+              "text-[0.8125rem]",
+              inverse ? "text-white/60" : "text-charcoal/65",
+            )}
+          >
+            {postDate.format(new Date(post.publishedAt))}
+          </time>
+        </div>
+      ) : channel.preview ? (
+        <Image
+          src={channel.preview.src}
+          alt={channel.preview.alt}
+          width={channel.preview.width}
+          height={channel.preview.height}
+          sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
+          className="border-charcoal/12 mt-5 block h-auto w-full border"
+        />
+      ) : null}
+
+      {linkable ? (
+        <p
+          className={cn(
+            "font-display mt-auto pt-5 text-[0.7rem] font-semibold tracking-[0.18em]",
+            inverse ? "text-brand-bright" : "text-brand",
+          )}
+        >
+          바로가기
+          <span
+            aria-hidden="true"
+            className="ml-1.5 inline-block transition-transform group-hover:translate-x-1"
+          >
+            →
+          </span>
+        </p>
+      ) : (
         <p
           className={cn(
             "label-caps mt-5",
@@ -63,7 +137,7 @@ export function ChannelCard({
         >
           링크 준비 중
         </p>
-      ) : null}
+      )}
     </>
   );
 
@@ -77,7 +151,7 @@ export function ChannelCard({
   if (linkable) {
     return (
       <a
-        href={channel.url}
+        href={post?.url ?? channel.url}
         target="_blank"
         rel="noopener noreferrer"
         className={baseClass}

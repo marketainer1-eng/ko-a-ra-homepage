@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import {
-  getPublishedBooks,
+  getBooksWithDetailPage,
   getPublishedProjects,
   getPublishedStories,
 } from "@/lib/content";
@@ -14,6 +14,9 @@ import { bookPath, projectPath, routes, storyPath } from "@/lib/routes";
  * - 콘텐츠 상세는 status: "published" 인 항목만 포함한다.
  *   (draft 는 noindex 이므로 sitemap 에서도 제외)
  */
+/** 빌드 때 한 번만 생성한다 (정적 HTML 내보내기 지원) */
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticEntries: MetadataRoute.Sitemap = [
     { url: absoluteUrl(routes.home), changeFrequency: "monthly", priority: 1 },
@@ -58,14 +61,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }),
   );
 
-  const bookEntries: MetadataRoute.Sitemap = getPublishedBooks().map(
-    (book) => ({
+  const bookEntries: MetadataRoute.Sitemap = getBooksWithDetailPage()
+    .filter((book) => book.status === "published")
+    .map((book) => ({
       url: absoluteUrl(bookPath(book.slug)),
       lastModified: book.publicationDate ?? undefined,
       changeFrequency: "yearly",
       priority: 0.6,
-    }),
-  );
+    }));
 
   const projectEntries: MetadataRoute.Sitemap = getPublishedProjects().map(
     (project) => ({

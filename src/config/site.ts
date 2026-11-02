@@ -89,14 +89,14 @@ export const siteConfig = {
   /** 사용자 노출용 브랜드 한글명 */
   nameKo: BRAND_NAME_KO,
   /** HOME 기본 title */
-  title: `${BRAND_NAME_COMBINED} | AI 이커머스 전문가`,
+  title: `${BRAND_NAME_COMBINED} | AI 이커머스 전문가·쇼핑몰 창업 교육`,
   /** 하위 페이지 title 템플릿 */
   titleTemplate: `%s | ${BRAND_NAME_COMBINED}`,
   /** HOME 기본 description */
   description:
     `AI 이커머스 전문가 ${BRAND_NAME_COMBINED}의 공식 홈페이지. ` +
-    "쇼핑몰 창업과 이커머스 현장에서 시작해 AI 검색·추천·쇼핑 에이전트·GEO·AI 마케팅·Vertical AI로 " +
-    "확장해온 전문성과 프로젝트, 저서, 미디어 활동, 그리고 앞으로의 비전을 소개합니다.",
+    "명지대학교 AI 이커머스학과 주임교수로서 쇼핑몰 창업, AI 검색·추천, 쇼핑 에이전트, GEO, " +
+    "AI 마케팅과 산업별 AI 활용을 연구하고 교육합니다.",
   /** 기본 로케일 (html lang 속성) */
   locale: "ko",
   /** Open Graph 로케일 */

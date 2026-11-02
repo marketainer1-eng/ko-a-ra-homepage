@@ -76,11 +76,11 @@ export default function ProjectsPage() {
             </ol>
           </div>
 
-          <DraftNote className="mt-14">
-            현재 목록은 상세 페이지 구조 확인을 위한 placeholder 이며 draft
-            상태입니다. draft 프로젝트는 noindex 처리되고 sitemap 에서
-            제외됩니다.
-          </DraftNote>
+          {projects.some((project) => project.status === "draft") ? (
+            <DraftNote className="mt-14">
+              draft 프로젝트는 noindex 처리되고 sitemap 에서 제외됩니다.
+            </DraftNote>
+          ) : null}
         </Container>
       </section>
 
